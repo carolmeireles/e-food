@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../Card/styles";
 import MenuItem from "../MenuItem";
 import { MenuList, Modal, ModalContent } from "./styles";
-import pizza from '../../assets/pizza.png'
+import pizza from '../../assets/pizza2.png'
 import close from '../../assets/fechar.png'
 
 const Menu = () => (
@@ -29,16 +29,15 @@ const Menu = () => (
         </MenuList>
         <Modal className="invisible">
             <ModalContent className="container">
-                <header>
+                {/* <header>
                     <img src={close} alt="Ícone de fechar" />
-                </header>
+                </header> */}
                 <img src={pizza} alt="Imagem do prato" />
                 <div>
                     <h4>Pizza Marguerita</h4>
                     <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius ipsum, minus provident ducimus, aliquam magnam culpa fugiat animi quam ab eaque vel quis velit fuga magni, modi expedita. Porro, iste.
-                    </p>
-                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo aperiam distinctio cum incidunt sapiente, ut impedit, doloremque rerum quas, a magnam itaque blanditiis voluptas? Dolorum nobis non eius eaque repellat!
+                        <br /><br />
                         Serve de 2 a 3 pessoas
                     </p>
                     <Link to='#'>
