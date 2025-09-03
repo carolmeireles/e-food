@@ -6,6 +6,7 @@ export const MenuContainer = styled.div`
     color: ${cores.bege};
     font-size: 14px;
     padding: 8px;
+    cursor: pointer;
 
     img {
         width: 100%;

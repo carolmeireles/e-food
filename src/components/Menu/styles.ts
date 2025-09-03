@@ -21,7 +21,7 @@ export const Modal = styled.div`
     justify-content: center;
 
     &.invisible {
-        //display: none;
+        display: none;
     }
 
     .overlay {
@@ -44,6 +44,30 @@ export const ModalContent = styled.div`
     color: ${cores.branco};
     padding: 32px;
     font-size: 14px;
+    /* 
+    header {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        right: 0;
+    } */
+
+    header {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: auto;
+        height: auto;
+        background: none;
+        z-index: 2;
+
+        img {
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+    }
 
     div {
         padding-left: 24px;
@@ -62,5 +86,6 @@ export const ModalContent = styled.div`
     button {
         background-color: ${cores.bege};
         color: ${cores.rosa};
+        margin: 0;
     }
 `
