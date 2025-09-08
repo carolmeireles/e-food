@@ -6,6 +6,11 @@ export const CardContainer = styled.div`
     border: 1px solid ${cores.rosa};
     position: relative;
     font-size: 14px;
+
+    > img {
+        width: 472px;
+        height: 217px;
+    }
 `
 
 export const Tags = styled.div`
