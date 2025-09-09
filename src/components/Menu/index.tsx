@@ -5,12 +5,20 @@ import MenuItem from "../MenuItem";
 import { MenuList, Modal, ModalContent } from "./styles";
 import pizza from '../../assets/pizza2.png'
 import close from '../../assets/fechar.png'
+import type { Cardapio, Restaurante } from "../../pages/Home";
 
 interface ModalState {
     invisible: boolean
 }
 
-const Menu = () => {
+type Props = {
+    restaurante: Restaurante
+    //pratos: Cardapio[]
+}
+
+const Menu = ({ restaurante }: Props) => {
+
+    const pratos = restaurante.cardapio
 
     const [modal, setModal] = useState<ModalState>({
         invisible: true
@@ -25,7 +33,16 @@ const Menu = () => {
     return (
         <div className="container">
             <MenuList>
-                <li onClick={() => {
+                {pratos.map(() => (
+                    <li onClick={() => {
+                        setModal({
+                            invisible: false
+                        })
+                    }}>
+                        <MenuItem />
+                    </li>
+                ))}
+                {/* <li onClick={() => {
                     setModal({
                         invisible: false
                     })
@@ -66,7 +83,7 @@ const Menu = () => {
                     })
                 }}>
                     <MenuItem />
-                </li>
+                </li> */}
             </MenuList>
             <Modal className={modal.invisible ? 'invisible' : ''}>
                 <ModalContent className="container">

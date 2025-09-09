@@ -4,7 +4,7 @@ import { List } from './styles'
 // import massa from '../../assets/massa.png'
 import type { Restaurante } from '../../pages/Home'
 
-export type Props = {
+type Props = {
     restaurantes: Restaurante[]
 }
 

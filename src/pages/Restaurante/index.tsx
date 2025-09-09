@@ -23,8 +23,8 @@ const Restaurante = () => {
     return (
         <>
             <Header />
-            <Banner />
-            <Menu />
+            <Banner restaurante={restaurante} />
+            <Menu restaurante={restaurante} />
         </>
     )
 }

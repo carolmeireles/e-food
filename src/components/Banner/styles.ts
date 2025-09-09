@@ -6,6 +6,7 @@ export const Container = styled.div`
     height: 280px;
     background-size: cover;
     display: block;
+    //background-color: rgba(0, 0, 0, 0.8);
 
     .container {
         position: relative;
