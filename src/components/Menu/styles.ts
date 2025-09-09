@@ -9,6 +9,30 @@ export const MenuList = styled.ul`
     margin-bottom: 120px;
 `
 
+export const MenuItem = styled.div`
+    background-color: ${cores.rosa};
+    color: ${cores.bege};
+    font-size: 14px;
+    padding: 8px;
+    cursor: pointer;
+
+    img {
+        width: 100%;
+    }
+`
+
+export const Title = styled.h3`
+    font-weight: 900;
+    padding-top: 8px;
+    font-size: 16px;
+`
+
+export const Desc = styled.p`
+    padding: 8px 0;
+    font-weight: 400;
+    line-height: 22px;
+`
+
 export const Modal = styled.div`
     display: flex;
     position: fixed;
@@ -44,14 +68,10 @@ export const ModalContent = styled.div`
     color: ${cores.branco};
     padding: 32px;
     font-size: 14px;
-    /* 
-    header {
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        right: 0;
-    } */
+
+    img {
+        width: 280px;
+    }
 
     header {
         position: absolute;
@@ -88,4 +108,15 @@ export const ModalContent = styled.div`
         color: ${cores.rosa};
         margin: 0;
     }
+`
+
+export const Botao = styled.button`
+    width: 100%;
+    background-color: ${cores.bege};
+    color: ${cores.rosa};
+    border: none;
+    font-weight: bold;
+    padding: 4px 0;
+    cursor: pointer;
+    margin: 0;
 `

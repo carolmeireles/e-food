@@ -1,19 +1,23 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { Button } from "../Card/styles";
-import MenuItem from "../MenuItem";
-import { MenuList, Modal, ModalContent } from "./styles";
-import pizza from '../../assets/pizza2.png'
+import { MenuList, MenuItem, Title, Desc, Modal, ModalContent, Botao } from "./styles";
 import close from '../../assets/fechar.png'
 import type { Cardapio, Restaurante } from "../../pages/Home";
 
-interface ModalState {
+interface ModalState extends Cardapio {
     invisible: boolean
 }
 
 type Props = {
     restaurante: Restaurante
-    //pratos: Cardapio[]
+}
+
+export const formataPreco = (preco = 0) => {
+    return new Intl.NumberFormat('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+    }).format(preco)
 }
 
 const Menu = ({ restaurante }: Props) => {
@@ -21,69 +25,54 @@ const Menu = ({ restaurante }: Props) => {
     const pratos = restaurante.cardapio
 
     const [modal, setModal] = useState<ModalState>({
-        invisible: true
+        invisible: true,
+        foto: '',
+        preco: 0,
+        id: 0,
+        nome: '',
+        descricao: '',
+        porcao: ''
     })
 
     const closeModal = () => {
         setModal({
-            invisible: true
+            invisible: true,
+            foto: '',
+            preco: 0,
+            id: 0,
+            nome: '',
+            descricao: '',
+            porcao: ''
         })
     }
 
     return (
         <div className="container">
             <MenuList>
-                {pratos.map(() => (
+                {pratos.map((prato) => (
                     <li onClick={() => {
                         setModal({
-                            invisible: false
+                            invisible: false,
+                            foto: prato.foto,
+                            preco: prato.preco,
+                            id: prato.id,
+                            nome: prato.nome,
+                            descricao: prato.descricao,
+                            porcao: prato.porcao
                         })
                     }}>
-                        <MenuItem />
+                        <MenuItem>
+                            <img src={prato.foto} alt="pizza" />
+                            <Title>{prato.nome}</Title>
+                            <Desc>
+                                {prato.descricao}
+                            </Desc>
+                            <Link to='#'>
+                                <Botao>Adicionar ao carrinho</Botao>
+                            </Link>
+                        </MenuItem>
                     </li>
                 ))}
-                {/* <li onClick={() => {
-                    setModal({
-                        invisible: false
-                    })
-                }}>
-                    <MenuItem />
-                </li>
-                <li onClick={() => {
-                    setModal({
-                        invisible: false
-                    })
-                }}>
-                    <MenuItem />
-                </li>
-                <li onClick={() => {
-                    setModal({
-                        invisible: false
-                    })
-                }}>
-                    <MenuItem />
-                </li>
-                <li onClick={() => {
-                    setModal({
-                        invisible: false
-                    })
-                }}>
-                    <MenuItem />
-                </li>
-                <li onClick={() => {
-                    setModal({
-                        invisible: false
-                    })
-                }}>
-                    <MenuItem />
-                </li>
-                <li onClick={() => {
-                    setModal({
-                        invisible: false
-                    })
-                }}>
-                    <MenuItem />
-                </li> */}
             </MenuList>
             <Modal className={modal.invisible ? 'invisible' : ''}>
                 <ModalContent className="container">
@@ -92,16 +81,16 @@ const Menu = ({ restaurante }: Props) => {
                             closeModal()
                         }} />
                     </header>
-                    <img src={pizza} alt="Imagem do prato" />
+                    <img src={modal.foto} alt="Imagem do prato" />
                     <div>
-                        <h4>Pizza Marguerita</h4>
+                        <h4>{modal.nome}</h4>
                         <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo aperiam distinctio cum incidunt sapiente, ut impedit, doloremque rerum quas, a magnam itaque blanditiis voluptas? Dolorum nobis non eius eaque repellat!
+                            {modal.descricao}
                             <br /><br />
-                            Serve de 2 a 3 pessoas
+                            {modal.porcao}
                         </p>
                         <Link to='#'>
-                            <Button>Adicionar ao carrinho - R$ 60,90</Button>
+                            <Button>Adicionar ao carrinho - {formataPreco(modal.preco)}</Button>
                         </Link>
                     </div>
                 </ModalContent>
