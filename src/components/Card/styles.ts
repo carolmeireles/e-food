@@ -7,9 +7,10 @@ export const CardContainer = styled.div`
     position: relative;
     font-size: 14px;
 
-    > img {
-        width: 472px;
+    img {
+        width: 100%;
         height: 217px;
+        object-fit: fill;
     }
 `
 
@@ -31,7 +32,9 @@ export const TitleContainer = styled.div`
         font-weight: bold;
 
         img {
-            padding-left: 8px;
+            margin-left: 8px;
+            width: 21px;
+            height: 21px;
         }
     }
 `

@@ -11,14 +11,15 @@ type Props = {
     titulo: string
     nota: number
     desc: string
-    //link: string
 }
 
 const Card = ({ id, imagem, tags, titulo, nota, desc }: Props) => {
     
     return (
         <CardContainer>
-            <img src={imagem} alt={titulo} />
+            <Link to={`/restaurante/${id}`}>
+                <img src={imagem} alt={titulo} />
+            </Link>
             <Tags>
                 <Tag>{tags}</Tag>
             </Tags>

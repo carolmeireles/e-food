@@ -46,6 +46,13 @@ const Menu = ({ restaurante }: Props) => {
         })
     }
 
+    const getDesc = (desc: string) => {
+        if (desc.length > 150) {
+            return desc.slice(0, 147) + '...'
+        }
+        return desc
+    }
+
     return (
         <div className="container">
             <MenuList>
@@ -62,10 +69,10 @@ const Menu = ({ restaurante }: Props) => {
                         })
                     }}>
                         <MenuItem>
-                            <img src={prato.foto} alt="pizza" />
+                            <img src={prato.foto} alt={prato.nome} />
                             <Title>{prato.nome}</Title>
                             <Desc>
-                                {prato.descricao}
+                                {getDesc(prato.descricao)}
                             </Desc>
                             <Link to='#'>
                                 <Botao>Adicionar ao carrinho</Botao>

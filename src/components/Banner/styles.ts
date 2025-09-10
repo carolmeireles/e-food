@@ -5,8 +5,9 @@ export const Container = styled.div`
     width: 100%;
     height: 280px;
     background-size: cover;
+    background-repeat: no-repeat;
     display: block;
-    //background-color: rgba(0, 0, 0, 0.8);
+    position: relative;
 
     .container {
         position: relative;
@@ -14,6 +15,7 @@ export const Container = styled.div`
         display: flex;
         justify-content: space-between;
         align-items: flex-end;
+        z-index: 1;
 
         h2 {
             position: absolute;
@@ -23,6 +25,16 @@ export const Container = styled.div`
             font-style: thin;
             font-size: 32px;
         }
+    }
+
+    &:after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        content: '';
     }
 `
 
