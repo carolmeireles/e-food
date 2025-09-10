@@ -7,7 +7,7 @@ import Tag from '../Tag'
 type Props = {
     id: number
     imagem: string
-    tags: string
+    tags: string[]
     titulo: string
     nota: number
     desc: string
@@ -21,7 +21,9 @@ const Card = ({ id, imagem, tags, titulo, nota, desc }: Props) => {
                 <img src={imagem} alt={titulo} />
             </Link>
             <Tags>
-                <Tag>{tags}</Tag>
+                {tags.map((tag) => (
+                    <Tag key={tag}>{tag}</Tag>
+                ))}
             </Tags>
             <TitleContainer>
                 <Title>{titulo}</Title>

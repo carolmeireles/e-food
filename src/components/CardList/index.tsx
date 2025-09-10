@@ -7,6 +7,21 @@ type Props = {
 }
 
 const CardList = ({ restaurantes }: Props) => { 
+
+    const getTags = (restaurante: Restaurante) => {
+        const tags = []
+
+        if(restaurante.tipo) {
+            tags.push(restaurante.tipo)
+        }
+
+        if(restaurante.destacado) {
+            tags.push(`destaque`)
+        }
+
+        return tags
+    }
+
     return (
         <div className="container">
             <List>
@@ -15,7 +30,7 @@ const CardList = ({ restaurantes }: Props) => {
                         <Card
                             id={restaurante.id}
                             imagem={restaurante.capa}
-                            tags={restaurante.tipo}
+                            tags={getTags(restaurante)}
                             titulo={restaurante.titulo}
                             nota={restaurante.avaliacao}
                             desc={restaurante.descricao}
