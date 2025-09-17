@@ -23,7 +23,7 @@ export type Restaurante = {
 }
 
 const Home = () => {
-    const [restaurante, setRestaurante] = useState<Restaurante>()
+    const [restaurante, setRestaurante] = useState<Restaurante[]>([])
 
     useEffect(() => {
         fetch(`https://ebac-fake-api.vercel.app/api/efood/restaurantes`)

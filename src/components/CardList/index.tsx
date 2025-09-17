@@ -1,6 +1,6 @@
 import Card from '../Card'
 import { List } from './styles'
-import type { Restaurante } from '../../pages/Home'
+import { Restaurante } from '../../pages/Home'
 
 type Props = {
     restaurantes: Restaurante[]
