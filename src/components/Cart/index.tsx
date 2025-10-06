@@ -1,4 +1,4 @@
-import { CartContainer, Overlay, Sidebar, CartItem, Total, Button } from './styles'
+import { CartContainer, Overlay, Sidebar, CartItem, Excluir, Total, Button } from './styles'
 import pizza from '../../assets/pizza2.png'
 import excluir from '../../assets/excluir.png'
 
@@ -15,9 +15,7 @@ const Cart = () => {
                             <h3>Pizza Marguerita</h3>
                             <span>R$ 60,90</span>
                         </div>
-                        <button>
-                            <img src={excluir} alt="Lixeira" />
-                        </button>
+                        <Excluir src={excluir} alt="Lixeira" />
                     </CartItem>
                 </ul>
                 <Total>

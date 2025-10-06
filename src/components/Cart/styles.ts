@@ -36,7 +36,7 @@ export const CartItem = styled.li`
     background-color: ${cores.bege};
     color: ${cores.rosa};
 
-    > img {
+    img:first-child {
         width: 80px;
         height: 80px;
         object-fit: cover;
@@ -53,17 +53,15 @@ export const CartItem = styled.li`
         display: block;
         padding-top: 16px;
     }
+`
 
-    button {
-        background-color: transparent;
-        border: none;
-        width: 16px;
-        height: 16px;
-        position: absolute;
-        top: 0;
-        right: 0;
-        cursor: pointer;
-    }
+export const Excluir = styled.img`
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
 `
 
 export const Total = styled.p`
