@@ -14,7 +14,7 @@ export const HeaderStyle = styled.header`
         font-weight: 900;
         font-size: 18px;
 
-        a {
+        button {
             text-decoration: none;
             color: ${cores.rosa};
         }

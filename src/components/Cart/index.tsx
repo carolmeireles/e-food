@@ -1,12 +1,25 @@
-import { CartContainer, Overlay, Sidebar, CartItem, Excluir, Total, Button } from './styles'
+import { CartContainer, Overlay, Sidebar, CartItem, BtnExcluir, Total, Button } from './styles'
 import pizza from '../../assets/pizza2.png'
 import excluir from '../../assets/excluir.png'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootReducer } from '../../store'
+import { close, remove } from '../../store/reducers/cart'
 
 const Cart = () => {
+    const {isOpen, items} = useSelector((state: RootReducer) => state.cart)
+    const dispatch = useDispatch()
+
+    const closeCart = () => {
+        dispatch(close())
+    }
+
+    const removeItem = (id: number) => {
+        dispatch(remove(id))
+    }
 
     return (
-        <CartContainer>
-            <Overlay />
+        <CartContainer className={isOpen ? 'is-open' : ''}>
+            <Overlay onClick={closeCart} />
             <Sidebar>
                 <ul>
                     <CartItem>
@@ -15,7 +28,7 @@ const Cart = () => {
                             <h3>Pizza Marguerita</h3>
                             <span>R$ 60,90</span>
                         </div>
-                        <Excluir src={excluir} alt="Lixeira" />
+                        <BtnExcluir /*onClick={() => removeItem()}*/ />
                     </CartItem>
                 </ul>
                 <Total>

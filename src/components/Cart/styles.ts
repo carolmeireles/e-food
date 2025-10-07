@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
-//import excluir from '../../assets/excluir.png'
+import excluir from '../../assets/excluir.png'
 
 export const CartContainer = styled.div`
     position: fixed;
@@ -8,9 +8,13 @@ export const CartContainer = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex; //tirar depois
+    display: none;
     justify-content: flex-end;
     z-index: 1;
+
+    &.is-open {
+        display: flex;
+    }
 `
 
 export const Overlay = styled.div`
@@ -55,13 +59,16 @@ export const CartItem = styled.li`
     }
 `
 
-export const Excluir = styled.img`
+export const BtnExcluir = styled.button`
     width: 16px;
     height: 16px;
     position: absolute;
-    top: 0;
-    right: 0;
+    bottom: 8px;
+    right: 8px;
     cursor: pointer;
+    background-color: transparent;
+    border: none;
+    background-image: url(${excluir});
 `
 
 export const Total = styled.p`
