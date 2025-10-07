@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
-import excluir from '../../assets/excluir.png'
 
 export const CartContainer = styled.div`
     position: fixed;
@@ -8,7 +7,7 @@ export const CartContainer = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    display: none;
+    display: flex;
     justify-content: flex-end;
     z-index: 1;
 
@@ -39,6 +38,7 @@ export const CartItem = styled.li`
     position: relative;
     background-color: ${cores.bege};
     color: ${cores.rosa};
+    margin-bottom: 16px;
 
     img:first-child {
         width: 80px;
@@ -59,16 +59,13 @@ export const CartItem = styled.li`
     }
 `
 
-export const BtnExcluir = styled.button`
+export const Excluir = styled.img`
     width: 16px;
     height: 16px;
     position: absolute;
     bottom: 8px;
     right: 8px;
     cursor: pointer;
-    background-color: transparent;
-    border: none;
-    background-image: url(${excluir});
 `
 
 export const Total = styled.p`
