@@ -26,7 +26,7 @@ const Home = () => {
     const [restaurante, setRestaurante] = useState<Restaurante[]>([])
 
     useEffect(() => {
-        fetch(`https://ebac-fake-api.vercel.app/api/efood/restaurantes`)
+        fetch(`https://api-ebac.vercel.app/api/efood/restaurantes`)
             .then(response => response.json())
             .then(response => setRestaurante(response))
     }, [])

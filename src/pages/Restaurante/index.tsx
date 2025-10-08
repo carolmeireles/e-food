@@ -11,7 +11,7 @@ const Restaurante = () => {
     const [restaurante, setRestaurante] = useState<Restaurante>()
 
     useEffect(() => {
-        fetch(`https://ebac-fake-api.vercel.app/api/efood/restaurantes/${id}`)
+        fetch(`https://api-ebac.vercel.app/api/efood/restaurantes/${id}`)
             .then(response => response.json())
             .then(response => setRestaurante(response))
     }, [id])

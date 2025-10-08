@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import { Button } from "../Card/styles";
 import { MenuList, MenuItem, Title, Desc, Modal, ModalContent, Botao } from "./styles";
 import close from '../../assets/fechar.png'
 import type { Cardapio, Restaurante } from "../../pages/Home";
+import { add, open } from "../../store/reducers/cart";
 
 interface ModalState extends Cardapio {
     invisible: boolean
@@ -21,7 +24,6 @@ export const formataPreco = (preco = 0) => {
 }
 
 const Menu = ({ restaurante }: Props) => {
-
     const pratos = restaurante.cardapio
 
     const [modal, setModal] = useState<ModalState>({
@@ -51,6 +53,12 @@ const Menu = ({ restaurante }: Props) => {
             return desc.slice(0, 147) + '...'
         }
         return desc
+    }
+
+    const dispatch = useDispatch()
+    const addCart = () => {
+        dispatch(add(modal))
+        dispatch(open())
     }
 
     return (
@@ -96,9 +104,7 @@ const Menu = ({ restaurante }: Props) => {
                             <br /><br />
                             {modal.porcao}
                         </p>
-                        <Link to='#'>
-                            <Button>Adicionar ao carrinho - {formataPreco(modal.preco)}</Button>
-                        </Link>
+                        <Button onClick={addCart}>Adicionar ao carrinho - {formataPreco(modal.preco)}</Button>
                     </div>
                 </ModalContent>
                 <div className="overlay" onClick={() => {
