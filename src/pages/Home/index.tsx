@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
 import CardList from "../../components/CardList";
 import Hero from "../../components/Hero";
+import { useGetListaRestaurantesQuery } from "../../services/api";
 
 export interface Cardapio {
     foto: string
@@ -23,22 +23,16 @@ export type Restaurante = {
 }
 
 const Home = () => {
-    const [restaurante, setRestaurante] = useState<Restaurante[]>([])
-
-    useEffect(() => {
-        fetch(`https://api-ebac.vercel.app/api/efood/restaurantes`)
-            .then(response => response.json())
-            .then(response => setRestaurante(response))
-    }, [])
+    const { data: listaRestaurantes } = useGetListaRestaurantesQuery()
     
-    if(!restaurante) {
+    if(!listaRestaurantes) {
         return <h3>Carregando...</h3>
     }
     
     return (
         <>
             <Hero />
-            <CardList restaurantes={restaurante} />
+            <CardList restaurantes={listaRestaurantes} />
         </>
     )
 }
