@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { cores } from '../../styles'
+import { breakpoints, cores } from '../../styles'
 
 export const MenuList = styled.ul`
     display: grid;
@@ -7,6 +7,10 @@ export const MenuList = styled.ul`
     gap: 32px;
     margin-top: 56px;
     margin-bottom: 120px;
+
+    @media (max-width: ${breakpoints.tablet}) {
+        grid-template-columns: 1fr;
+    }
 `
 
 export const MenuItem = styled.div`

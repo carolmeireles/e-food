@@ -7,6 +7,10 @@ export const cores = {
     branco: '#fff'
 }
 
+export const breakpoints = {
+  tablet: '768px'
+}
+
 export const CssGlobal = createGlobalStyle`
     * {
         margin: 0;
