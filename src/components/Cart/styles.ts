@@ -30,6 +30,8 @@ export const Sidebar = styled.aside`
     padding: 32px 8px 0 8px;
     width: 360px;
     z-index: 1;
+    color: ${cores.bege};
+    font-size: 14px;
 `
 
 export const CartItem = styled.li`

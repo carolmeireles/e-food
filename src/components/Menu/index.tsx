@@ -59,6 +59,7 @@ const Menu = ({ restaurante }: Props) => {
     const addCart = () => {
         dispatch(add(modal))
         dispatch(open())
+        closeModal()
     }
 
     return (

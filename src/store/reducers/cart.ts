@@ -21,7 +21,6 @@ const cartSlice = createSlice({
                 state.items.push(action.payload)
             } else {
                 alert('Esse prato já foi adicionado ao carrinho.')
-                state.items.push(action.payload)
             }
         },
         remove: (state, action: PayloadAction<number>) => {
