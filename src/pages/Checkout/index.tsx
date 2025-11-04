@@ -1,4 +1,4 @@
-import { Form, InputRow } from './styles'
+import { Titulo, Form, Row, InputGroup } from './styles'
 import { Botao } from "../../components/Menu/styles"
 import { useState } from 'react'
 
@@ -9,66 +9,89 @@ const Checkout = () => {
         <>
             {openPayment ? (
                 <>
-                    <h3>
+                    <Titulo>
                         Pagamento - Valor a pagar <span>R$ 190,90</span>
-                    </h3>
-                    <form>
-                        <InputRow>
-                            <label htmlFor="cardName">Nome no cartão</label>
-                            <input type="text" id="name" />
-                        </InputRow>
+                    </Titulo>
+                    <Form>
 
-                        <InputRow>
-                            <label htmlFor="cardNumber">Número do cartão</label>
-                            <input type="number" id="cardNumber" />
+                        <Row>
+                            <InputGroup>
+                                <label htmlFor="cardName">Nome no cartão</label>
+                                <input type="text" id="name" />
+                            </InputGroup>
+                        </Row>
 
-                            <label htmlFor="cardCode">CVV</label>
-                            <input type="number" id="cardCode" />
-                        </InputRow>
+                        <Row>
+                            <InputGroup maxWidth='228px'>
+                                <label htmlFor="cardNumber">Número do cartão</label>
+                                <input type="number" id="cardNumber" />
+                            </InputGroup>
 
-                        <InputRow>
-                            <label htmlFor="expiresMonth">Mês de vencimento</label>
-                            <input type="number" id="expiresMonth" />
+                            <InputGroup maxWidth='87px'>
+                                <label htmlFor="cardCode">CVV</label>
+                                <input type="number" id="cardCode" />
+                            </InputGroup>
+                        </Row>
 
-                            <label htmlFor="expiresYear">Ano de vencimento</label>
-                            <input type="number" id="expiresYear" />
-                        </InputRow>
+                        <Row>
+                            <InputGroup maxWidth='155px'>
+                                <label htmlFor="expiresMonth">Mês de vencimento</label>
+                                <input type="number" id="expiresMonth" />
+                            </InputGroup>
+
+                            <InputGroup maxWidth='155px'>
+                                <label htmlFor="expiresYear">Ano de vencimento</label>
+                                <input type="number" id="expiresYear" />
+                            </InputGroup>
+                        </Row>
 
                         <Botao>Finalizar pagamento</Botao>
                         <Botao onClick={() => setOpenPayment(false)}>Voltar para a edição de endereço</Botao>
-                    </form>
+                    </Form>
                 </>
             ) : (
                 <>
-                    <h3>Entrega</h3>
+                    <Titulo>Entrega</Titulo>
                     <Form>
-                        <InputRow>
-                            <label htmlFor="name">Quem irá receber</label>
-                            <input type="text" id="name" />
-                        </InputRow>
-        
-                        <InputRow>
-                            <label htmlFor="address">Endereço</label>
-                            <input type="text" id="address" />
-                        </InputRow>
-        
-                        <InputRow>
-                            <label htmlFor="city">Cidade</label>
-                            <input type="text" id="city" />
-                        </InputRow>
-        
-                        <InputRow>
-                            <label htmlFor="cep">CEP</label>
-                            <input type="number" id="cep" />
-        
-                            <label htmlFor="num">Número</label>
-                            <input type="number" id="num" />
-                        </InputRow>
-        
-                        <InputRow>
-                            <label htmlFor="complemento">Complemento (opcional)</label>
-                            <input type="text" id="complemento" />
-                        </InputRow>
+                        <Row>
+                            <InputGroup>
+                                <label htmlFor="name">Quem irá receber</label>
+                                <input type="text" id="name" />
+                            </InputGroup>
+                        </Row>
+                        
+                        <Row>
+                            <InputGroup>
+                                <label htmlFor="address">Endereço</label>
+                                <input type="text" id="address" />
+                            </InputGroup>
+                        </Row>
+
+                        <Row>
+                            <InputGroup>
+                                <label htmlFor="city">Cidade</label>
+                                <input type="text" id="city" />
+                            </InputGroup>
+                        </Row>
+
+                        <Row>
+                            <InputGroup maxWidth='155px'>
+                                <label htmlFor="cep">CEP</label>
+                                <input type="number" id="cep" />
+                            </InputGroup>
+
+                            <InputGroup maxWidth='155px'>
+                                <label htmlFor="num">Número</label>
+                                <input type="number" id="num" />
+                            </InputGroup>
+                        </Row>
+
+                        <Row>
+                            <InputGroup>
+                                <label htmlFor="complemento">Complemento (opcional)</label>
+                                <input type="text" id="complemento" />
+                            </InputGroup>
+                        </Row>
         
                         <Botao onClick={() => setOpenPayment(true)}>Continuar com o pagamento</Botao>
                         <Botao>Voltar para o carrinho</Botao>
