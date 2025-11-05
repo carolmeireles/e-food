@@ -5,13 +5,11 @@ import { RootReducer } from '../../store'
 import { close, remove } from '../../store/reducers/cart'
 import { formataPreco } from '../Menu'
 import { Botao } from '../Menu/styles'
-import Checkout from '../../pages/Checkout'
-import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
     const {isOpen, items} = useSelector((state: RootReducer) => state.cart)
-    const [openForm, setOpenForm] = useState(false)
+    //const [checkout, setCheckout] = useState(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -46,7 +44,7 @@ const Cart = () => {
             <CartContainer className={isOpen ? 'is-open' : ''}>
                 <Overlay onClick={closeCart} />
                 <Sidebar>
-                    {/* {openForm ? (
+                    {/* {checkout ? (
                         <Checkout />
                     ) : ( */}
                         <>
