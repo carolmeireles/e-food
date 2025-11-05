@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Botao } from '../../components/Menu/styles'
+import { Botao } from '../Menu/styles'
 import { cores } from '../../styles'
 
 type InputGroupProps = {

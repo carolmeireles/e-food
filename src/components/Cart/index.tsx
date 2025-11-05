@@ -5,13 +5,13 @@ import { RootReducer } from '../../store'
 import { close, remove } from '../../store/reducers/cart'
 import { formataPreco } from '../Menu'
 import { Botao } from '../Menu/styles'
-import { useNavigate } from 'react-router-dom'
+import Checkout from '../Checkout'
+import { useState } from 'react'
 
 const Cart = () => {
     const {isOpen, items} = useSelector((state: RootReducer) => state.cart)
-    //const [checkout, setCheckout] = useState(false)
+    const [checkout, setCheckout] = useState(false)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
 
     const closeCart = () => {
         dispatch(close())
@@ -26,27 +26,29 @@ const Cart = () => {
             return(acumulador += valorAtual.preco!)
         }, 0)
     }
-
-    const goToCheckout = () => {
-        navigate('/checkout')
-        closeCart()
-    }
     
-    // if(items.length = 0) {
-    //     return (
-    //         <p>
-    //             O carrinho está vazio. Adicione pelo menos um prato para continuar.
-    //         </p>
-    //     )
-    // }
+    if(items.length === 0) {
+        return (
+            <>
+                <CartContainer className={isOpen ? 'is-open' : ''}>
+                <Overlay onClick={closeCart} />
+                <Sidebar>
+                    <p>
+                        O carrinho está vazio. Adicione pelo menos um prato para continuar.
+                    </p>
+                </Sidebar>
+                </CartContainer>
+            </>
+        )
+    }
 
     return (
             <CartContainer className={isOpen ? 'is-open' : ''}>
                 <Overlay onClick={closeCart} />
                 <Sidebar>
-                    {/* {checkout ? (
+                    {checkout ? (
                         <Checkout />
-                    ) : ( */}
+                    ) : (
                         <>
                             <ul>
                                 {items.map((item) => (
@@ -64,9 +66,9 @@ const Cart = () => {
                                 Valor total
                                 <span>{formataPreco(getTotalPrice())}</span>
                             </Total>
-                            <Botao onClick={goToCheckout}>Continuar com a entrega</Botao>
+                            <Botao onClick={() => setCheckout(true)}>Continuar com a entrega</Botao>
                         </>
-                    {/* )} */}
+                    )}
                 </Sidebar>
             </CartContainer>
     )
