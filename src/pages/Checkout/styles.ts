@@ -14,9 +14,12 @@ export const Titulo = styled.h3`
 export const Form = styled.div`
 
     ${Botao} {
-        //margin-top: 16px;
         margin-bottom: 8px;
         font-size: 14px;
+
+        &.margin-top {
+            margin-top: 16px;
+        }
     }
 `
 

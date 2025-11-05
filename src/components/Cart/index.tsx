@@ -7,11 +7,13 @@ import { formataPreco } from '../Menu'
 import { Botao } from '../Menu/styles'
 import Checkout from '../../pages/Checkout'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const Cart = () => {
     const {isOpen, items} = useSelector((state: RootReducer) => state.cart)
     const [openForm, setOpenForm] = useState(false)
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const closeCart = () => {
         dispatch(close())
@@ -27,60 +29,48 @@ const Cart = () => {
         }, 0)
     }
 
+    const goToCheckout = () => {
+        navigate('/checkout')
+        closeCart()
+    }
+    
+    // if(items.length = 0) {
+    //     return (
+    //         <p>
+    //             O carrinho está vazio. Adicione pelo menos um prato para continuar.
+    //         </p>
+    //     )
+    // }
+
     return (
-        <CartContainer className={isOpen ? 'is-open' : ''}>
-            <Overlay onClick={closeCart} />
-            <Sidebar>
-                {openForm ? (
-                    <Checkout />
-                ) : (
-                    <>
-                        <ul>
-                            {items.map((item) => (
-                                <CartItem>
-                                    <img src={item.foto} alt={item.nome} />
-                                    <div>
-                                        <h3>{item.nome}</h3>
-                                        <span>{formataPreco(item.preco)}</span>
-                                    </div>
-                                    <Excluir src={excluir} onClick={() => removeItem(item.id)} />
-                                </CartItem>
-                            ))}
-                        </ul>
-                        <Total>
-                            Valor total
-                            <span>{formataPreco(getTotalPrice())}</span>
-                        </Total>
-                        <Botao onClick={() => setOpenForm(true)}>Continuar com a entrega</Botao>
-                    </>
-                )}
-                {/* {items.length > 0 ? (
-                    <>
-                        <ul>
-                            {items.map((item) => (
-                                <CartItem>
-                                    <img src={item.foto} alt={item.nome} />
-                                    <div>
-                                        <h3>{item.nome}</h3>
-                                        <span>{formataPreco(item.preco)}</span>
-                                    </div>
-                                    <Excluir src={excluir} onClick={() => removeItem(item.id)} />
-                                </CartItem>
-                            ))}
-                        </ul>
-                        <Total>
-                            Valor total
-                            <span>{formataPreco(getTotalPrice())}</span>
-                        </Total>
-                        <Botao onClick={() => setOpenForm(true)}>Continuar com a entrega</Botao>
-                    </>
-                ) : (
-                    <p>
-                        O carrinho está vazio. Adicione pelo menos um prato para continuar.
-                    </p>
-                )} */}
-            </Sidebar>
-        </CartContainer>
+            <CartContainer className={isOpen ? 'is-open' : ''}>
+                <Overlay onClick={closeCart} />
+                <Sidebar>
+                    {/* {openForm ? (
+                        <Checkout />
+                    ) : ( */}
+                        <>
+                            <ul>
+                                {items.map((item) => (
+                                    <CartItem>
+                                        <img src={item.foto} alt={item.nome} />
+                                        <div>
+                                            <h3>{item.nome}</h3>
+                                            <span>{formataPreco(item.preco)}</span>
+                                        </div>
+                                        <Excluir src={excluir} onClick={() => removeItem(item.id)} />
+                                    </CartItem>
+                                ))}
+                            </ul>
+                            <Total>
+                                Valor total
+                                <span>{formataPreco(getTotalPrice())}</span>
+                            </Total>
+                            <Botao onClick={goToCheckout}>Continuar com a entrega</Botao>
+                        </>
+                    {/* )} */}
+                </Sidebar>
+            </CartContainer>
     )
 }
 
