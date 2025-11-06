@@ -1,13 +1,13 @@
 import { Titulo, Form, Row, InputGroup } from "./styles";
-import { Botao } from "../../components/Menu/styles";
+import { Botao } from "../Menu/styles";
 import { useState } from "react";
 import { useFormik } from "formik";
-import Cart from "../../components/Cart";
+import Cart from "../Cart";
 import * as Yup from "yup";
 import { usePurchaseMutation } from "../../services/api";
 import { useSelector } from "react-redux";
 import { RootReducer } from "../../store";
-import { formataPreco } from "../../components/Menu";
+import { formataPreco } from "../Menu";
 
 const Checkout = () => {
   const { items } = useSelector((state: RootReducer) => state.cart);

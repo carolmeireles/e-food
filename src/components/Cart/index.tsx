@@ -6,7 +6,7 @@ import { close, remove } from '../../store/reducers/cart'
 import { formataPreco } from '../Menu'
 import { Botao } from '../Menu/styles'
 import { useState } from 'react'
-import Checkout from '../../pages/Checkout'
+import Checkout from '../Checkout'
 
 const Cart = () => {
     const {isOpen, items} = useSelector((state: RootReducer) => state.cart)
