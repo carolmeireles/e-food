@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Botao } from '../Menu/styles'
+import { Botao } from '../../components/Menu/styles'
 import { cores } from '../../styles'
 
 type InputGroupProps = {
@@ -20,6 +20,10 @@ export const Form = styled.div`
         &.margin-top {
             margin-top: 16px;
         }
+    }
+
+    .is-hidden {
+        display: none;
     }
 `
 
@@ -44,5 +48,9 @@ export const InputGroup = styled.div<InputGroupProps>`
         font-weight: bold;
         color: #4b4b4b;
         margin-top: 8px;
+
+        &.error {
+            border: 2px solid red;
+        }
     }
 `

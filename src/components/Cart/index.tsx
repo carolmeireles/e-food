@@ -5,12 +5,12 @@ import { RootReducer } from '../../store'
 import { close, remove } from '../../store/reducers/cart'
 import { formataPreco } from '../Menu'
 import { Botao } from '../Menu/styles'
-import Checkout from '../Checkout'
 import { useState } from 'react'
+import Checkout from '../../pages/Checkout'
 
 const Cart = () => {
     const {isOpen, items} = useSelector((state: RootReducer) => state.cart)
-    const [checkout, setCheckout] = useState(false)
+    const [openCheckout, setOpenCheckout] = useState(false)
     const dispatch = useDispatch()
 
     const closeCart = () => {
@@ -46,7 +46,7 @@ const Cart = () => {
             <CartContainer className={isOpen ? 'is-open' : ''}>
                 <Overlay onClick={closeCart} />
                 <Sidebar>
-                    {checkout ? (
+                    {openCheckout ? (
                         <Checkout />
                     ) : (
                         <>
@@ -66,7 +66,7 @@ const Cart = () => {
                                 Valor total
                                 <span>{formataPreco(getTotalPrice())}</span>
                             </Total>
-                            <Botao onClick={() => setCheckout(true)}>Continuar com a entrega</Botao>
+                            <Botao onClick={() => setOpenCheckout(true)}>Continuar com a entrega</Botao>
                         </>
                     )}
                 </Sidebar>
