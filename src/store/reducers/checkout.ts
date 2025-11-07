@@ -1,14 +1,22 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+type CheckoutState = {
+    isOpen: boolean
+}
+
+const initialState: CheckoutState = {
+    isOpen: false
+}
+
 const checkoutSlice = createSlice({
     name: 'checkout',
-    initialState: false,
+    initialState,
     reducers: {
         openCheckout: (state) => {
-            state = true
+            state.isOpen = true
         },
         closeCheckout: (state) => {
-            state = false
+            state.isOpen = false
         }
     }
 })

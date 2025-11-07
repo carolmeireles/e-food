@@ -5,16 +5,22 @@ import { RootReducer } from '../../store'
 import { close, remove } from '../../store/reducers/cart'
 import { formataPreco } from '../Menu'
 import { Botao } from '../Menu/styles'
-import { useState } from 'react'
-import Checkout from '../Checkout'
+// import { useState } from 'react'
+// import Checkout from '../Checkout'
+import { openCheckout } from '../../store/reducers/checkout'
 
 const Cart = () => {
     const {isOpen, items} = useSelector((state: RootReducer) => state.cart)
-    const [openCheckout, setOpenCheckout] = useState(false)
+    //const [openCheckout, setOpenCheckout] = useState(false)
     const dispatch = useDispatch()
 
     const closeCart = () => {
         dispatch(close())
+    }
+
+    const abrirCheckout = () => {
+        dispatch(close())
+        dispatch(openCheckout())
     }
 
     const removeItem = (id: number) => {
@@ -46,13 +52,13 @@ const Cart = () => {
             <CartContainer className={isOpen ? 'is-open' : ''}>
                 <Overlay onClick={closeCart} />
                 <Sidebar>
-                    {openCheckout ? (
+                    {/* {openCheckout ? (
                         <Checkout />
-                    ) : (
+                    ) : ( */}
                         <>
                             <ul>
                                 {items.map((item) => (
-                                    <CartItem>
+                                    <CartItem key={item.id}>
                                         <img src={item.foto} alt={item.nome} />
                                         <div>
                                             <h3>{item.nome}</h3>
@@ -66,9 +72,9 @@ const Cart = () => {
                                 Valor total
                                 <span>{formataPreco(getTotalPrice())}</span>
                             </Total>
-                            <Botao onClick={() => setOpenCheckout(true)}>Continuar com a entrega</Botao>
+                            <Botao onClick={abrirCheckout}>Continuar com a entrega</Botao>
                         </>
-                    )}
+                    {/* )} */}
                 </Sidebar>
             </CartContainer>
     )

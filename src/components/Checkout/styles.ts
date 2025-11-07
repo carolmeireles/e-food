@@ -22,7 +22,7 @@ export const Form = styled.div`
         }
     }
 
-    .is-hidden {
+    .display-none {
         display: none;
     }
 `
