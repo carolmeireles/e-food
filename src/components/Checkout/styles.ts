@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Botao } from '../Menu/styles'
 import { cores } from '../../styles'
 
 type InputGroupProps = {
@@ -11,18 +10,9 @@ export const Titulo = styled.h3`
     margin-bottom: 16px;
 `
 
-export const Form = styled.div`
+export const Div = styled.div`
 
-    ${Botao} {
-        margin-bottom: 8px;
-        font-size: 14px;
-
-        &.margin-top {
-            margin-top: 16px;
-        }
-    }
-
-    .display-none {
+    &.display-none {
         display: none;
     }
 `

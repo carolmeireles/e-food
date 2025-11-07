@@ -124,4 +124,5 @@ export const Botao = styled.button`
     padding: 4px 0;
     cursor: pointer;
     margin: 0;
+    font-size: 14px;
 `
