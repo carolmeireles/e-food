@@ -1,32 +1,38 @@
-import { Titulo, Form, Row, InputGroup } from "./styles";
-import { Botao } from "../Menu/styles";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { usePurchaseMutation } from "../../services/api";
 import { useDispatch, useSelector } from "react-redux";
+import { IMaskInput } from 'react-imask'
+
+import { Titulo, Form, Row, InputGroup } from "./styles";
+import { Botao } from "../Menu/styles";
+import { usePurchaseMutation } from "../../services/api";
 import { RootReducer } from "../../store";
 import { formataPreco } from "../Menu";
 import { CartContainer, Overlay, Sidebar } from "../Cart/styles";
-//import InputMask from 'react-input-mask'
 import { closeCheckout } from "../../store/reducers/checkout";
-import { open } from "../../store/reducers/cart";
+import { clear, open } from "../../store/reducers/cart";
 
 const Checkout = () => {
-  const {isOpen} = useSelector((state: RootReducer) => state.checkout)
+  const { isOpen } = useSelector((state: RootReducer) => state.checkout);
   const { items } = useSelector((state: RootReducer) => state.cart);
   const [openDelivery, setOpenDelivery] = useState(true);
-  const [purchase] = usePurchaseMutation();
-  const dispatch = useDispatch()
-
-  const goToCart = () => {
-    dispatch(closeCheckout())
-    dispatch(open())
-  }
+  const [purchase, { data, isSuccess }] = usePurchaseMutation();
+  const dispatch = useDispatch();
 
   const fecharCheckout = () => {
-    dispatch(closeCheckout())
-  }
+    dispatch(closeCheckout());
+  };
+
+  const goToCart = () => {
+    dispatch(closeCheckout());
+    dispatch(open());
+  };
+
+  const finalizarPedido = () => {
+    dispatch(clear());
+    dispatch(closeCheckout());
+  };
 
   const form = useFormik({
     initialValues: {
@@ -55,10 +61,22 @@ const Checkout = () => {
       num: Yup.string().required("Campo obrigatório"),
       complemento: Yup.string().required("Campo obrigatório"),
       cardName: Yup.string().required("Campo obrigatório"),
-      cardNumber: Yup.string().required("Campo obrigatório"),
-      cardCode: Yup.string().required("Campo obrigatório"),
-      expiresMonth: Yup.string().required("Campo obrigatório"),
-      expiresYear: Yup.string().required("Campo obrigatório"),
+      cardNumber: Yup.string()
+        .min(19, "O campo precisa de 19 caracteres")
+        .max(19, "O campo precisa de 19 caracteres")
+        .required("Campo obrigatório"),
+      cardCode: Yup.string()
+        .min(3, "O campo precisa de 3 dígitos")
+        .max(3, "O campo precisa de 3 dígitos")
+        .required("Campo obrigatório"),
+      expiresMonth: Yup.string()
+        .min(2, "O campo precisa de 2 dígitos")
+        .max(3, "O campo precisa de 2 dígitos")
+        .required("Campo obrigatório"),
+      expiresYear: Yup.string()
+        .min(2, "O campo precisa de 2 dígitos")
+        .max(3, "O campo precisa de 2 dígitos")
+        .required("Campo obrigatório"),
     }),
     onSubmit: (values) => {
       purchase({
@@ -78,18 +96,18 @@ const Checkout = () => {
               code: Number(values.cardCode),
               expires: {
                 month: Number(values.expiresMonth),
-                year: Number(values.expiresYear)
+                year: Number(values.expiresYear),
               },
             },
           },
         },
         products: items.map((item) => ({
           id: item.id,
-          price: item.preco as number
+          price: item.preco as number,
         })),
       });
     },
-  })
+  });
 
   const checkInputHasError = (fieldName: string) => {
     const isTouched = fieldName in form.touched;
@@ -97,16 +115,50 @@ const Checkout = () => {
     const hasError = isTouched && isInvalid;
 
     return hasError;
-  }
+  };
 
   const getTotalPrice = () => {
     return items.reduce((acumulador, valorAtual) => {
-        return(acumulador += valorAtual.preco!)
-    }, 0)   
+      return (acumulador += valorAtual.preco!);
+    }, 0);
+  };
+
+  if (isSuccess && data) {
+    return (
+      <>
+        <CartContainer className={isOpen ? "is-open" : ""}>
+          <Overlay onClick={fecharCheckout} />
+          <Sidebar>
+            <h3>
+              Pedido realizado
+              <span> - {data.orderId}</span>
+            </h3>
+            <p>
+              Estamos felizes em informar que seu pedido já está em processo de
+              preparação e, em breve, será entregue no endereço fornecido.
+            </p>
+            <p>
+              Gostaríamos de ressaltar que nossos entregadores não estão
+              autorizados a realizar cobranças extras.
+            </p>
+            <p>
+              Lembre-se da importância de higienizar as mãos após o recebimento
+              do pedido, garantindo assim sua segurança e bem-estar durante a
+              refeição.
+            </p>
+            <p>
+              Esperamos que desfrute de uma deliciosa e agradável experiência
+              gastronômica. Bom apetite!
+            </p>
+            <Botao onClick={finalizarPedido}>Concluir</Botao>
+          </Sidebar>
+        </CartContainer>
+      </>
+    );
   }
 
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
+    <CartContainer className={isOpen ? "is-open" : ""}>
       <Overlay onClick={fecharCheckout} />
       <Sidebar>
         <Form onSubmit={form.handleSubmit}>
@@ -165,14 +217,15 @@ const Checkout = () => {
               <Row>
                 <InputGroup maxWidth="155px">
                   <label htmlFor="cep">CEP</label>
-                  <input
+                  <IMaskInput
                     type="text"
                     id="cep"
                     value={form.values.cep}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     className={checkInputHasError("cep") ? "error" : ""}
-                    //mask="99999-999"
+                    mask="00000-000"
+                    placeholder="00000-000"
                   />
                 </InputGroup>
 
@@ -203,11 +256,14 @@ const Checkout = () => {
                 </InputGroup>
               </Row>
 
-              <Botao onClick={() => setOpenDelivery(false)} className="margin-top">
+              <Botao
+                onClick={() => setOpenDelivery(false)}
+                className="margin-top"
+              >
                 Continuar com o pagamento
               </Botao>
               <Botao onClick={goToCart}>Voltar para o carrinho</Botao>
-          </>
+            </>
           ) : (
             <>
               <Row>
@@ -227,27 +283,27 @@ const Checkout = () => {
               <Row>
                 <InputGroup maxWidth="228px">
                   <label htmlFor="cardNumber">Número do cartão</label>
-                  <input
+                  <IMaskInput
                     type="text"
                     id="cardNumber"
                     value={form.values.cardNumber}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     className={checkInputHasError("cardNumber") ? "error" : ""}
-                    //mask="9999 9999 9999 9999"
+                    mask="0000 0000 0000 0000"
                   />
                 </InputGroup>
 
                 <InputGroup maxWidth="87px">
                   <label htmlFor="cardCode">CVV</label>
-                  <input
+                  <IMaskInput
                     type="text"
                     id="cardCode"
                     value={form.values.cardCode}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     className={checkInputHasError("cardNumber") ? "error" : ""}
-                    //mask="9999"
+                    mask="000"
                   />
                 </InputGroup>
               </Row>
@@ -255,27 +311,29 @@ const Checkout = () => {
               <Row>
                 <InputGroup maxWidth="155px">
                   <label htmlFor="expiresMonth">Mês de vencimento</label>
-                  <input
+                  <IMaskInput
                     type="text"
                     id="expiresMonth"
                     value={form.values.expiresMonth}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
-                    className={checkInputHasError("expiresMonth") ? "error" : ""}
-                    //mask="99"
+                    className={
+                      checkInputHasError("expiresMonth") ? "error" : ""
+                    }
+                    mask="00"
                   />
                 </InputGroup>
 
                 <InputGroup maxWidth="155px">
                   <label htmlFor="expiresYear">Ano de vencimento</label>
-                  <input
+                  <IMaskInput
                     type="text"
                     id="expiresYear"
                     value={form.values.expiresYear}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     className={checkInputHasError("expiresYear") ? "error" : ""}
-                    //="99"
+                    mask="00"
                   />
                 </InputGroup>
               </Row>
