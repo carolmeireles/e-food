@@ -8,9 +8,6 @@ type InputGroupProps = {
 export const Titulo = styled.h3`
     font-size: 16px;
     margin-bottom: 16px;
-`
-
-export const Div = styled.div`
 
     &.display-none {
         display: none;

@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { IMaskInput } from "react-imask";
 
-import { Titulo, Row, InputGroup, Div } from "./styles";
+import { Titulo, Row, InputGroup } from "./styles";
 import { Botao } from "../Menu/styles";
 import { usePurchaseMutation } from "../../services/api";
 import { RootReducer } from "../../store";
@@ -17,7 +17,7 @@ import Button from "../Button";
 const Checkout = () => {
   const { isOpen } = useSelector((state: RootReducer) => state.checkout);
   const { items } = useSelector((state: RootReducer) => state.cart);
-  const [openDelivery, setOpenDelivery] = useState(true);
+  const [openPayment, setOpenPayment] = useState(false);
   const [purchase, { data, isSuccess }] = usePurchaseMutation();
   const dispatch = useDispatch();
 
@@ -61,25 +61,22 @@ const Checkout = () => {
         .required("Digite sua cidade"),
       num: Yup.string().required("Campo obrigatório"),
       complemento: Yup.string(),
-      cardName: Yup.string()
-        .min(5, "Mínimo de 5 caracteres")
-        .required("Campo obrigatório"),
-      cardNumber: Yup.string()
-        .min(19, "O campo precisa de 19 caracteres")
-        .max(19, "O campo precisa de 19 caracteres")
-        .required("Campo obrigatório"),
-      cardCode: Yup.string()
-        .min(3, "O campo precisa de 3 dígitos")
-        .max(3, "O campo precisa de 3 dígitos")
-        .required("Campo obrigatório"),
-      expiresMonth: Yup.string()
-        .min(2, "O campo precisa de 2 dígitos")
-        .max(3, "O campo precisa de 2 dígitos")
-        .required("Campo obrigatório"),
-      expiresYear: Yup.string()
-        .min(2, "O campo precisa de 2 dígitos")
-        .max(3, "O campo precisa de 2 dígitos")
-        .required("Campo obrigatório"),
+
+      cardName: Yup.string().when((values, schema) =>
+        openPayment ? schema.required('Campo obrigatório') : schema
+      ),
+      cardNumber: Yup.string().when((values, schema) =>
+        openPayment ? schema.required('Campo obrigatório') : schema
+      ),
+      cardCode: Yup.string().when((values, schema) =>
+        openPayment ? schema.required('Campo obrigatório') : schema
+      ),
+      expiresMonth: Yup.string().when((values, schema) =>
+        openPayment ? schema.required('Campo obrigatório') : schema
+      ),
+      expiresYear: Yup.string().when((values, schema) =>
+        openPayment ? schema.required('Campo obrigatório') : schema
+      )
     }),
     onSubmit: (values) => {
       purchase({
@@ -166,189 +163,194 @@ const Checkout = () => {
       <Sidebar>
         <form onSubmit={form.handleSubmit}>
           <Titulo>
-            {openDelivery ? "Entrega" : "Pagamento"}
-            <span className={openDelivery ? "display-none" : ""}>
+            {openPayment ? "Pagamento" : "Entrega"}
+            <span className={openPayment ? "" : "display-none"}>
               {" "}
               - Valor a pagar {formataPreco(getTotalPrice())}
             </span>
           </Titulo>
 
-          <Div className={openDelivery ? "" : "display-none"}>
-            <Row>
-              <InputGroup>
-                <label htmlFor="name">Quem irá receber</label>
-                <input
-                  type="text"
-                  id="name"
-                  value={form.values.name}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError("name") ? "error" : ""}
-                />
-              </InputGroup>
-            </Row>
+          {openPayment ? (
 
-            <Row>
-              <InputGroup>
-                <label htmlFor="address">Endereço</label>
-                <input
-                  type="text"
-                  id="address"
-                  value={form.values.address}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError("address") ? "error" : ""}
-                />
-              </InputGroup>
-            </Row>
+            <>
+              <Row>
+                <InputGroup>
+                  <label htmlFor="cardName">Nome no cartão</label>
+                  <input
+                    type="text"
+                    id="cardName"
+                    value={form.values.cardName}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError("cardName") ? "error" : ""}
+                  />
+                </InputGroup>
+              </Row>
 
-            <Row>
-              <InputGroup>
-                <label htmlFor="city">Cidade</label>
-                <input
-                  type="text"
-                  id="city"
-                  value={form.values.city}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError("city") ? "error" : ""}
-                />
-              </InputGroup>
-            </Row>
+              <Row>
+                <InputGroup maxWidth="228px">
+                  <label htmlFor="cardNumber">Número do cartão</label>
+                  <IMaskInput
+                    type="text"
+                    id="cardNumber"
+                    value={form.values.cardNumber}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError("cardNumber") ? "error" : ""}
+                    mask="0000 0000 0000 0000"
+                  />
+                </InputGroup>
 
-            <Row>
-              <InputGroup maxWidth="155px">
-                <label htmlFor="cep">CEP</label>
-                <IMaskInput
-                  type="text"
-                  id="cep"
-                  value={form.values.cep}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError("cep") ? "error" : ""}
-                  mask="00000-000"
-                  placeholder="00000-000"
-                />
-              </InputGroup>
+                <InputGroup maxWidth="87px">
+                  <label htmlFor="cardCode">CVV</label>
+                  <IMaskInput
+                    type="text"
+                    id="cardCode"
+                    value={form.values.cardCode}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError("cardNumber") ? "error" : ""}
+                    mask="000"
+                  />
+                </InputGroup>
+              </Row>
 
-              <InputGroup maxWidth="155px">
-                <label htmlFor="num">Número</label>
-                <input
-                  type="text"
-                  id="num"
-                  value={form.values.num}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError("num") ? "error" : ""}
-                />
-              </InputGroup>
-            </Row>
+              <Row>
+                <InputGroup maxWidth="155px">
+                  <label htmlFor="expiresMonth">Mês de vencimento</label>
+                  <IMaskInput
+                    type="text"
+                    id="expiresMonth"
+                    value={form.values.expiresMonth}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError("expiresMonth") ? "error" : ""}
+                    mask="00"
+                  />
+                </InputGroup>
 
-            <Row>
-              <InputGroup>
-                <label htmlFor="complemento">Complemento (opcional)</label>
-                <input
-                  type="text"
-                  id="complemento"
-                  value={form.values.complemento}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError("complemento") ? "error" : ""}
-                />
-              </InputGroup>
-            </Row>
+                <InputGroup maxWidth="155px">
+                  <label htmlFor="expiresYear">Ano de vencimento</label>
+                  <IMaskInput
+                    type="text"
+                    id="expiresYear"
+                    value={form.values.expiresYear}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError("expiresYear") ? "error" : ""}
+                    mask="00"
+                  />
+                </InputGroup>
+              </Row>
 
-            <Button
-              onClick={() => setOpenDelivery(false)}
-              className="margin-top"
-            >
-              Continuar com o pagamento
-            </Button>
-            <Button onClick={goToCart}>Voltar para o carrinho</Button>
-          </Div>
+              <Button
+                type="submit"
+                className="margin-top"
+                onClick={form.handleSubmit}
+              >
+                Finalizar pagamento
+              </Button>
+              <Button onClick={() => setOpenPayment(false)} type="reset">
+                Voltar para a edição de endereço
+              </Button>
+            </>
+          ) : (
+            <>
+              <Row>
+                <InputGroup>
+                  <label htmlFor="name">Quem irá receber</label>
+                  <input
+                    type="text"
+                    id="name"
+                    value={form.values.name}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError("name") ? "error" : ""}
+                  />
+                </InputGroup>
+              </Row>
 
-          <Div className={openDelivery ? "display-none" : ""}>
-            <Row>
-              <InputGroup>
-                <label htmlFor="cardName">Nome no cartão</label>
-                <input
-                  type="text"
-                  id="cardName"
-                  value={form.values.cardName}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError("cardName") ? "error" : ""}
-                />
-              </InputGroup>
-            </Row>
+              <Row>
+                <InputGroup>
+                  <label htmlFor="address">Endereço</label>
+                  <input
+                    type="text"
+                    id="address"
+                    value={form.values.address}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError("address") ? "error" : ""}
+                  />
+                </InputGroup>
+              </Row>
 
-            <Row>
-              <InputGroup maxWidth="228px">
-                <label htmlFor="cardNumber">Número do cartão</label>
-                <IMaskInput
-                  type="text"
-                  id="cardNumber"
-                  value={form.values.cardNumber}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError("cardNumber") ? "error" : ""}
-                  mask="0000 0000 0000 0000"
-                />
-              </InputGroup>
+              <Row>
+                <InputGroup>
+                  <label htmlFor="city">Cidade</label>
+                  <input
+                    type="text"
+                    id="city"
+                    value={form.values.city}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError("city") ? "error" : ""}
+                  />
+                </InputGroup>
+              </Row>
 
-              <InputGroup maxWidth="87px">
-                <label htmlFor="cardCode">CVV</label>
-                <IMaskInput
-                  type="text"
-                  id="cardCode"
-                  value={form.values.cardCode}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError("cardNumber") ? "error" : ""}
-                  mask="000"
-                />
-              </InputGroup>
-            </Row>
+              <Row>
+                <InputGroup maxWidth="155px">
+                  <label htmlFor="cep">CEP</label>
+                  <IMaskInput
+                    type="text"
+                    id="cep"
+                    value={form.values.cep}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError("cep") ? "error" : ""}
+                    mask="00000-000"
+                    placeholder="00000-000"
+                  />
+                </InputGroup>
 
-            <Row>
-              <InputGroup maxWidth="155px">
-                <label htmlFor="expiresMonth">Mês de vencimento</label>
-                <IMaskInput
-                  type="text"
-                  id="expiresMonth"
-                  value={form.values.expiresMonth}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError("expiresMonth") ? "error" : ""}
-                  mask="00"
-                />
-              </InputGroup>
+                <InputGroup maxWidth="155px">
+                  <label htmlFor="num">Número</label>
+                  <IMaskInput
+                    type="text"
+                    id="num"
+                    value={form.values.num}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError("num") ? "error" : ""}
+                    mask="00"
+                  />
+                </InputGroup>
+              </Row>
 
-              <InputGroup maxWidth="155px">
-                <label htmlFor="expiresYear">Ano de vencimento</label>
-                <IMaskInput
-                  type="text"
-                  id="expiresYear"
-                  value={form.values.expiresYear}
-                  onChange={form.handleChange}
-                  onBlur={form.handleBlur}
-                  className={checkInputHasError("expiresYear") ? "error" : ""}
-                  mask="00"
-                />
-              </InputGroup>
-            </Row>
+              <Row>
+                <InputGroup>
+                  <label htmlFor="complemento">Complemento (opcional)</label>
+                  <input
+                    type="text"
+                    id="complemento"
+                    value={form.values.complemento}
+                    onChange={form.handleChange}
+                    onBlur={form.handleBlur}
+                    className={checkInputHasError("complemento") ? "error" : ""}
+                  />
+                </InputGroup>
+              </Row>
 
-            <Button
-              type="submit"
-              className="margin-top"
-              onClick={form.handleSubmit}
-            >
-              Finalizar pagamento
-            </Button>
-            <Button onClick={() => setOpenDelivery(true)}>
-              Voltar para a edição de endereço
-            </Button>
-          </Div>
+              <Button
+                onClick={() => setOpenPayment(true)}
+                className="margin-top"
+                type="submit"
+              >
+                Continuar com o pagamento
+              </Button>
+              <Button onClick={goToCart} type="reset">Voltar para o carrinho</Button>
+            </>
+          )}
         </form>
       </Sidebar>
     </CartContainer>
