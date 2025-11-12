@@ -93,15 +93,15 @@ const Checkout = () => {
             number: Number(values.num),
             complement: values.complemento,
           },
-          payment: {
-            card: {
-              name: values.cardName,
-              number: values.cardNumber,
-              code: Number(values.cardCode),
-              expires: {
-                month: Number(values.expiresMonth),
-                year: Number(values.expiresYear),
-              },
+        },
+        payment: {
+          card: {
+            name: values.cardName,
+            number: values.cardNumber,
+            code: Number(values.cardCode),
+            expires: {
+              month: Number(values.expiresMonth),
+              year: Number(values.expiresYear),
             },
           },
         }
@@ -171,7 +171,6 @@ const Checkout = () => {
           </Titulo>
 
           {openPayment ? (
-
             <>
               <Row>
                 <InputGroup>
@@ -238,7 +237,7 @@ const Checkout = () => {
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
                     className={checkInputHasError("expiresYear") ? "error" : ""}
-                    mask="00"
+                    mask="0000"
                   />
                 </InputGroup>
               </Row>
@@ -344,7 +343,7 @@ const Checkout = () => {
               <Button
                 onClick={() => setOpenPayment(true)}
                 className="margin-top"
-                type="submit"
+                type="button"
               >
                 Continuar com o pagamento
               </Button>

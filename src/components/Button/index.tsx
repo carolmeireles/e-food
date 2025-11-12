@@ -3,7 +3,7 @@ import { Botao } from "./styles"
 export type Props = {
     onClick?: () => void
     children: string
-    type?: 'submit' | 'reset'
+    type?: 'submit' | 'reset' | 'button'
     className?: string
 }
 

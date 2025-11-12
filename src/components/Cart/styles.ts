@@ -32,6 +32,12 @@ export const Sidebar = styled.aside`
     z-index: 1;
     color: ${cores.bege};
     font-size: 14px;
+
+    p {
+        font-size: 14px;
+        line-height: 22px;
+        margin: 16px 0 24px;
+    }
 `
 
 export const CartItem = styled.li`
