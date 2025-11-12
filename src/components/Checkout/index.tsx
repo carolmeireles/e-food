@@ -13,13 +13,15 @@ import { CartContainer, Overlay, Sidebar } from "../Cart/styles";
 import { closeCheckout } from "../../store/reducers/checkout";
 import { clear, open } from "../../store/reducers/cart";
 import Button from "../Button";
+import { useNavigate } from "react-router-dom";
 
 const Checkout = () => {
   const { isOpen } = useSelector((state: RootReducer) => state.checkout);
   const { items } = useSelector((state: RootReducer) => state.cart);
   const [openPayment, setOpenPayment] = useState(false);
-  const [purchase, { data, isSuccess }] = usePurchaseMutation();
+  const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation();
   const dispatch = useDispatch();
+  const navigate = useNavigate()
 
   const fecharCheckout = () => {
     dispatch(closeCheckout());
@@ -33,6 +35,8 @@ const Checkout = () => {
   const finalizarPedido = () => {
     dispatch(clear());
     dispatch(closeCheckout());
+    navigate('/')
+    window.location.reload()
   };
 
   const form = useFormik({
@@ -62,21 +66,27 @@ const Checkout = () => {
       num: Yup.string().required("Campo obrigatório"),
       complemento: Yup.string(),
 
-      cardName: Yup.string().when((values, schema) =>
-        openPayment ? schema.required('Campo obrigatório') : schema
-      ),
-      cardNumber: Yup.string().when((values, schema) =>
-        openPayment ? schema.required('Campo obrigatório') : schema
-      ),
-      cardCode: Yup.string().when((values, schema) =>
-        openPayment ? schema.required('Campo obrigatório') : schema
-      ),
-      expiresMonth: Yup.string().when((values, schema) =>
-        openPayment ? schema.required('Campo obrigatório') : schema
-      ),
-      expiresYear: Yup.string().when((values, schema) =>
-        openPayment ? schema.required('Campo obrigatório') : schema
-      )
+      cardName: Yup.string().required('Campo obrigatório'),
+      cardNumber: Yup.string().required('Campo obrigatório'),
+      cardCode: Yup.string().required('Campo obrigatório'),
+      expiresMonth: Yup.string().required('Campo obrigatório'),
+      expiresYear: Yup.string().required('Campo obrigatório')
+
+      // cardName: Yup.string().when((values, schema) =>
+      //   openPayment ? schema.required('Campo obrigatório') : schema
+      // ),
+      // cardNumber: Yup.string().when((values, schema) =>
+      //   openPayment ? schema.required('Campo obrigatório') : schema
+      // ),
+      // cardCode: Yup.string().when((values, schema) =>
+      //   openPayment ? schema.required('Campo obrigatório') : schema
+      // ),
+      // expiresMonth: Yup.string().when((values, schema) =>
+      //   openPayment ? schema.required('Campo obrigatório') : schema
+      // ),
+      // expiresYear: Yup.string().when((values, schema) =>
+      //   openPayment ? schema.required('Campo obrigatório') : schema
+      // )
     }),
     onSubmit: (values) => {
       purchase({
@@ -246,6 +256,7 @@ const Checkout = () => {
                 type="submit"
                 className="margin-top"
                 onClick={form.handleSubmit}
+                disabled={isLoading}
               >
                 Finalizar pagamento
               </Button>
