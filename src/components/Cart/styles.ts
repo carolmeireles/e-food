@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
+import { Botao } from '../Menu/styles'
 
 export const CartContainer = styled.div`
     position: fixed;
@@ -32,11 +33,16 @@ export const Sidebar = styled.aside`
     z-index: 1;
     color: ${cores.bege};
     font-size: 14px;
+    overflow-y: auto;
 
     p {
         font-size: 14px;
         line-height: 22px;
         margin: 16px 0 24px;
+    }
+
+    ${Botao} {
+        margin-bottom: 8px;
     }
 `
 
