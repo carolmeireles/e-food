@@ -89,7 +89,7 @@ const Checkout = () => {
           address: {
             description: values.address,
             city: values.city,
-            zipCode: values.cep,
+            zipCode: values.cep.replace(/[\s-]/g, ""),
             number: Number(values.num),
             complement: values.complemento,
           },
@@ -97,7 +97,7 @@ const Checkout = () => {
         payment: {
           card: {
             name: values.cardName,
-            number: values.cardNumber,
+            number: values.cardNumber.replace(/[\s-]/g, ""),
             code: Number(values.cardCode),
             expires: {
               month: Number(values.expiresMonth),
