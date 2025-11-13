@@ -114,15 +114,3 @@ export const ModalContent = styled.div`
         margin: 0;
     }
 `
-
-export const Botao = styled.button`
-    width: 100%;
-    background-color: ${cores.bege};
-    color: ${cores.rosa};
-    border: none;
-    font-weight: bold;
-    padding: 4px 0;
-    cursor: pointer;
-    margin: 0;
-    font-size: 14px;
-`

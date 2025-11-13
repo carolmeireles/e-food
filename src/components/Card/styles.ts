@@ -48,7 +48,7 @@ export const Desc = styled.p`
     padding: 0 8px 16px;
 `
 
-export const Button = styled.button`
+export const Btn = styled.button`
     background-color: ${cores.rosa};
     color: ${cores.begeClaro};
     padding: 6px 4px;

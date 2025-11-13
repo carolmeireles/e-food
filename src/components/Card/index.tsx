@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 
 import estrela from '../../assets/estrela.png'
-import { Button, CardContainer, Desc, Tags, Title, TitleContainer } from './styles'
+import { Btn, CardContainer, Desc, Tags, Title, TitleContainer } from './styles'
 import Tag from '../Tag'
 
 type Props = {
@@ -36,7 +36,7 @@ const Card = ({ id, imagem, tags, titulo, nota, desc }: Props) => {
                 {desc}
             </Desc>
             <Link to={`/restaurante/${id}`}>
-                <Button>Saiba mais</Button>
+                <Btn>Saiba mais</Btn>
             </Link>
         </CardContainer>
     )

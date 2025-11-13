@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { cores } from '../../styles'
-import { Botao } from '../Menu/styles'
+import { Botao } from '../Button/styles'
 
 export const CartContainer = styled.div`
     position: fixed;

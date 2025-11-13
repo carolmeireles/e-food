@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootReducer } from '../../store'
 import { close, remove } from '../../store/reducers/cart'
 import { formataPreco } from '../Menu'
-import { Botao } from '../Menu/styles'
 import { openCheckout } from '../../store/reducers/checkout'
+import Button from '../Button'
 
 const Cart = () => {
     const {isOpen, items} = useSelector((state: RootReducer) => state.cart)
@@ -66,7 +66,7 @@ const Cart = () => {
                             Valor total
                             <span>{formataPreco(getTotalPrice())}</span>
                         </Total>
-                        <Botao onClick={abrirCheckout}>Continuar com a entrega</Botao>
+                        <Button onClick={abrirCheckout}>Continuar com a entrega</Button>
                     </>
                 </Sidebar>
             </CartContainer>

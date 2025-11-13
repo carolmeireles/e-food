@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { IMaskInput } from "react-imask";
 
 import { Titulo, Row, InputGroup } from "./styles";
-import { Botao } from "../Menu/styles";
 import { usePurchaseMutation } from "../../services/api";
 import { RootReducer } from "../../store";
 import { formataPreco } from "../Menu";
@@ -160,7 +159,7 @@ const Checkout = () => {
               Esperamos que desfrute de uma deliciosa e agradável experiência
               gastronômica. Bom apetite!
             </p>
-            <Botao onClick={finalizarPedido}>Concluir</Botao>
+            <Button onClick={finalizarPedido}>Concluir</Button>
           </Sidebar>
         </CartContainer>
       </>
