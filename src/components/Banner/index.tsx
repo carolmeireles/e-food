@@ -1,19 +1,19 @@
-import { Container, Titulo } from './styles'
-import type { Restaurante } from '../../pages/Home'
+import { Container, Titulo } from "./styles";
+import type { Restaurante } from "../../pages/Home";
 
 type Props = {
-    restaurante: Restaurante
-}
+  restaurante: Restaurante;
+};
 
 const Banner = ({ restaurante }: Props) => (
-    <Container style={{ backgroundImage: `url(${restaurante.capa})`}}>
-        <div className="container">
-            <h2>{restaurante.tipo}</h2>
-            <div>
-                <Titulo>{restaurante.titulo}</Titulo>
-            </div>
-        </div>
-    </Container>
-)
+  <Container style={{ backgroundImage: `url(${restaurante.capa})` }}>
+    <div className="container">
+      <h2>{restaurante.tipo}</h2>
+      <div>
+        <Titulo>{restaurante.titulo}</Titulo>
+      </div>
+    </div>
+  </Container>
+);
 
-export default Banner
+export default Banner;

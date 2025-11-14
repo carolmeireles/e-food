@@ -20,7 +20,7 @@ const Checkout = () => {
   const [openPayment, setOpenPayment] = useState(false);
   const [purchase, { data, isSuccess, isLoading }] = usePurchaseMutation();
   const dispatch = useDispatch();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const fecharCheckout = () => {
     dispatch(closeCheckout());
@@ -34,8 +34,8 @@ const Checkout = () => {
   const finalizarPedido = () => {
     dispatch(clear());
     dispatch(closeCheckout());
-    navigate('/')
-    window.location.reload()
+    navigate("/");
+    window.location.reload();
   };
 
   const form = useFormik({
@@ -65,27 +65,11 @@ const Checkout = () => {
       num: Yup.string().required("Campo obrigatório"),
       complemento: Yup.string(),
 
-      cardName: Yup.string().required('Campo obrigatório'),
-      cardNumber: Yup.string().required('Campo obrigatório'),
-      cardCode: Yup.string().required('Campo obrigatório'),
-      expiresMonth: Yup.string().required('Campo obrigatório'),
-      expiresYear: Yup.string().required('Campo obrigatório')
-
-      // cardName: Yup.string().when((values, schema) =>
-      //   openPayment ? schema.required('Campo obrigatório') : schema
-      // ),
-      // cardNumber: Yup.string().when((values, schema) =>
-      //   openPayment ? schema.required('Campo obrigatório') : schema
-      // ),
-      // cardCode: Yup.string().when((values, schema) =>
-      //   openPayment ? schema.required('Campo obrigatório') : schema
-      // ),
-      // expiresMonth: Yup.string().when((values, schema) =>
-      //   openPayment ? schema.required('Campo obrigatório') : schema
-      // ),
-      // expiresYear: Yup.string().when((values, schema) =>
-      //   openPayment ? schema.required('Campo obrigatório') : schema
-      // )
+      cardName: Yup.string().required("Campo obrigatório"),
+      cardNumber: Yup.string().required("Campo obrigatório"),
+      cardCode: Yup.string().required("Campo obrigatório"),
+      expiresMonth: Yup.string().required("Campo obrigatório"),
+      expiresYear: Yup.string().required("Campo obrigatório"),
     }),
     onSubmit: (values) => {
       purchase({
@@ -113,7 +97,7 @@ const Checkout = () => {
               year: Number(values.expiresYear),
             },
           },
-        }
+        },
       });
     },
   });
@@ -159,7 +143,13 @@ const Checkout = () => {
               Esperamos que desfrute de uma deliciosa e agradável experiência
               gastronômica. Bom apetite!
             </p>
-            <Button onClick={finalizarPedido}>Concluir</Button>
+            <Button
+              onClick={finalizarPedido}
+              title="Clique aqui para concluir"
+              type="button"
+            >
+              Concluir
+            </Button>
           </Sidebar>
         </CartContainer>
       </>
@@ -232,7 +222,9 @@ const Checkout = () => {
                     value={form.values.expiresMonth}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
-                    className={checkInputHasError("expiresMonth") ? "error" : ""}
+                    className={
+                      checkInputHasError("expiresMonth") ? "error" : ""
+                    }
                     mask="00"
                   />
                 </InputGroup>
@@ -256,10 +248,15 @@ const Checkout = () => {
                 className="margin-top"
                 onClick={form.handleSubmit}
                 disabled={isLoading}
+                title="Clique aqui para finalizar o pagamento"
               >
                 Finalizar pagamento
               </Button>
-              <Button onClick={() => setOpenPayment(false)} type="reset">
+              <Button
+                onClick={() => setOpenPayment(false)}
+                type="reset"
+                title="Clique aqui para voltar à edição de endereço"
+              >
                 Voltar para a edição de endereço
               </Button>
             </>
@@ -354,10 +351,17 @@ const Checkout = () => {
                 onClick={() => setOpenPayment(true)}
                 className="margin-top"
                 type="button"
+                title="Clique aqui para continuar com o pagamento"
               >
                 Continuar com o pagamento
               </Button>
-              <Button onClick={goToCart} type="reset">Voltar para o carrinho</Button>
+              <Button
+                onClick={goToCart}
+                type="button"
+                title="Clique aqui para voltar ao carrinho"
+              >
+                Voltar para o carrinho
+              </Button>
             </>
           )}
         </form>

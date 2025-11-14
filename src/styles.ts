@@ -1,15 +1,15 @@
-import { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from "styled-components";
 
 export const cores = {
-    rosa: '#E66767',
-    bege: '#FFEBD9',
-    begeClaro: '#FFF8F2',
-    branco: '#fff'
-}
+  rosa: "#E66767",
+  bege: "#FFEBD9",
+  begeClaro: "#FFF8F2",
+  branco: "#fff",
+};
 
 export const breakpoints = {
-  tablet: '768px'
-}
+  tablet: "768px",
+};
 
 export const CssGlobal = createGlobalStyle`
     * {
@@ -30,4 +30,4 @@ export const CssGlobal = createGlobalStyle`
         width: 100%;
         margin: 0 auto;
     }
-`
+`;
