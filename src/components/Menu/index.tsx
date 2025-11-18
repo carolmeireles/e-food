@@ -6,6 +6,7 @@ import close from "../../assets/fechar.png";
 import type { Cardapio, Restaurante } from "../../pages/Home";
 import { add, open } from "../../store/reducers/cart";
 import Button from "../Button";
+import { formatPriceBrl } from "../../utils";
 
 interface ModalState extends Cardapio {
   invisible: boolean;
@@ -13,13 +14,6 @@ interface ModalState extends Cardapio {
 
 type Props = {
   restaurante: Restaurante;
-};
-
-export const formataPreco = (preco = 0) => {
-  return new Intl.NumberFormat("pt-BR", {
-    style: "currency",
-    currency: "BRL",
-  }).format(preco);
 };
 
 const Menu = ({ restaurante }: Props) => {
@@ -112,7 +106,7 @@ const Menu = ({ restaurante }: Props) => {
               {modal.porcao}
             </p>
             <button onClick={addCart}>
-              Adicionar ao carrinho - {formataPreco(modal.preco)}
+              Adicionar ao carrinho - {formatPriceBrl(modal.preco)}
             </button>
           </div>
         </ModalContent>

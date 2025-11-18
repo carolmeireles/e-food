@@ -7,12 +7,12 @@ import { IMaskInput } from "react-imask";
 import { Titulo, Row, InputGroup } from "./styles";
 import { usePurchaseMutation } from "../../services/api";
 import { RootReducer } from "../../store";
-import { formataPreco } from "../Menu";
 import { CartContainer, Overlay, Sidebar } from "../Cart/styles";
 import { closeCheckout } from "../../store/reducers/checkout";
 import { clear, open } from "../../store/reducers/cart";
 import Button from "../Button";
 import { useNavigate } from "react-router-dom";
+import { formatPriceBrl, getTotalPrice } from "../../utils";
 
 const Checkout = () => {
   const { isOpen } = useSelector((state: RootReducer) => state.checkout);
@@ -110,12 +110,6 @@ const Checkout = () => {
     return hasError;
   };
 
-  const getTotalPrice = () => {
-    return items.reduce((acumulador, valorAtual) => {
-      return (acumulador += valorAtual.preco!);
-    }, 0);
-  };
-
   if (isSuccess && data) {
     return (
       <>
@@ -165,7 +159,7 @@ const Checkout = () => {
             {openPayment ? "Pagamento" : "Entrega"}
             <span className={openPayment ? "" : "display-none"}>
               {" "}
-              - Valor a pagar {formataPreco(getTotalPrice())}
+              - Valor a pagar {formatPriceBrl(getTotalPrice(items))}
             </span>
           </Titulo>
 

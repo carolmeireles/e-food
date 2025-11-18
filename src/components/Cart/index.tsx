@@ -10,9 +10,9 @@ import excluir from "../../assets/excluir.png";
 import { useDispatch, useSelector } from "react-redux";
 import { RootReducer } from "../../store";
 import { close, remove } from "../../store/reducers/cart";
-import { formataPreco } from "../Menu";
 import { openCheckout } from "../../store/reducers/checkout";
 import Button from "../Button";
+import { formatPriceBrl, getTotalPrice } from "../../utils";
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart);
@@ -29,12 +29,6 @@ const Cart = () => {
 
   const removeItem = (id: number) => {
     dispatch(remove(id));
-  };
-
-  const getTotalPrice = () => {
-    return items.reduce((acumulador, valorAtual) => {
-      return (acumulador += valorAtual.preco!);
-    }, 0);
   };
 
   if (items.length === 0) {
@@ -64,7 +58,7 @@ const Cart = () => {
                 <img src={item.foto} alt={item.nome} />
                 <div>
                   <h3>{item.nome}</h3>
-                  <span>{formataPreco(item.preco)}</span>
+                  <span>{formatPriceBrl(item.preco)}</span>
                 </div>
                 <Excluir src={excluir} onClick={() => removeItem(item.id)} />
               </CartItem>
@@ -72,7 +66,7 @@ const Cart = () => {
           </ul>
           <Total>
             Valor total
-            <span>{formataPreco(getTotalPrice())}</span>
+            <span>{formatPriceBrl(getTotalPrice(items))}</span>
           </Total>
           <Button
             onClick={abrirCheckout}
