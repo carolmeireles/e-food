@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { cores } from "../../styles";
+import { colors } from "../../styles";
 
 export const Container = styled.div`
   width: 100%;
@@ -21,7 +21,7 @@ export const Container = styled.div`
       position: absolute;
       top: 25px;
       font-weight: 100;
-      color: ${cores.branco};
+      color: ${colors.white};
       font-style: thin;
       font-size: 32px;
     }
@@ -41,6 +41,6 @@ export const Container = styled.div`
 export const Titulo = styled.h1`
   font-weight: 900;
   font-style: black;
-  color: ${cores.branco};
+  color: ${colors.white};
   font-size: 32px;
 `;

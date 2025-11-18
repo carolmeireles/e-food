@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { cores } from "../../styles";
+import { colors } from "../../styles";
 
 export const Btn = styled.button`
   width: 100%;
-  background-color: ${cores.bege};
-  color: ${cores.rosa};
+  background-color: ${colors.beige};
+  color: ${colors.salmon};
   border: none;
   font-weight: bold;
   padding: 4px 0;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { cores } from "../../styles";
+import { colors } from "../../styles";
 
 type InputGroupProps = {
   maxWidth?: string;
@@ -28,7 +28,7 @@ export const InputGroup = styled.div<InputGroupProps>`
   font-weight: bold;
 
   input {
-    background-color: ${cores.bege};
+    background-color: ${colors.beige};
     border: none;
     height: 32px;
     padding: 0 8px;

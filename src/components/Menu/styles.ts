@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { breakpoints, cores } from "../../styles";
+import { breakpoints, colors } from "../../styles";
 
 export const MenuList = styled.ul`
   display: grid;
@@ -14,8 +14,8 @@ export const MenuList = styled.ul`
 `;
 
 export const MenuItem = styled.div`
-  background-color: ${cores.rosa};
-  color: ${cores.bege};
+  background-color: ${colors.salmon};
+  color: ${colors.beige};
   font-size: 14px;
   padding: 8px;
 
@@ -68,8 +68,8 @@ export const ModalContent = styled.div`
   max-width: 1024px;
   position: relative;
   z-index: 1;
-  background-color: ${cores.rosa};
-  color: ${cores.branco};
+  background-color: ${colors.salmon};
+  color: ${colors.white};
   padding: 32px;
   font-size: 14px;
 
@@ -108,8 +108,8 @@ export const ModalContent = styled.div`
   }
 
   button {
-    background-color: ${cores.bege};
-    color: ${cores.rosa};
+    background-color: ${colors.beige};
+    color: ${colors.salmon};
     margin: 0;
     border: none;
     font-weight: bold;

@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { cores } from "../../styles";
+import { colors } from "../../styles";
 import { Btn } from "../Button/styles";
 
 export const CartContainer = styled.div`
@@ -27,11 +27,11 @@ export const Overlay = styled.div`
 `;
 
 export const Sidebar = styled.aside`
-  background-color: ${cores.rosa};
+  background-color: ${colors.salmon};
   padding: 32px 8px 0 8px;
   width: 360px;
   z-index: 1;
-  color: ${cores.bege};
+  color: ${colors.beige};
   font-size: 14px;
   overflow-y: auto;
 
@@ -50,8 +50,8 @@ export const CartItem = styled.li`
   display: flex;
   padding: 8px 0 12px 8px;
   position: relative;
-  background-color: ${cores.bege};
-  color: ${cores.rosa};
+  background-color: ${colors.beige};
+  color: ${colors.salmon};
   margin-bottom: 16px;
 
   img:first-child {
@@ -85,7 +85,7 @@ export const Excluir = styled.img`
 export const Total = styled.p`
   font-weight: bold;
   font-size: 14px;
-  color: ${cores.bege};
+  color: ${colors.beige};
   display: flex;
   justify-content: space-between;
   padding: 24px 0 16px;

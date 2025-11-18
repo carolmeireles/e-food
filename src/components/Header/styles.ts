@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { cores } from "../../styles";
+import { colors } from "../../styles";
 
 export const HeaderStyle = styled.header`
   width: 100%;
@@ -16,13 +16,13 @@ export const HeaderStyle = styled.header`
       font-weight: 900;
       font-size: 18px;
       text-decoration: none;
-      color: ${cores.rosa};
+      color: ${colors.salmon};
     }
 
     button {
       text-decoration: none;
       background-color: transparent;
-      color: ${cores.rosa};
+      color: ${colors.salmon};
       border: none;
       cursor: pointer;
       font-weight: 900;

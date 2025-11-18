@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import { cores } from "../../styles";
+import { colors } from "../../styles";
 import { Link } from "react-router-dom";
 
 export const CardContainer = styled.div`
-  background-color: ${cores.branco};
-  border: 1px solid ${cores.rosa};
+  background-color: ${colors.white};
+  border: 1px solid ${colors.salmon};
   position: relative;
   font-size: 14px;
 
@@ -50,8 +50,8 @@ export const Desc = styled.p`
 `;
 
 export const ButtonLink = styled(Link)`
-  background-color: ${cores.rosa};
-  color: ${cores.begeClaro};
+  background-color: ${colors.salmon};
+  color: ${colors.lightBeige};
   padding: 6px 4px;
   font-weight: bold;
   font-size: 14px;
