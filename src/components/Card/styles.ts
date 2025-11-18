@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { colors } from "../../styles";
 import { Link } from "react-router-dom";
+import { colors } from "../../styles";
 
 export const CardContainer = styled.div`
   background-color: ${colors.white};

@@ -3,16 +3,17 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useDispatch, useSelector } from "react-redux";
 import { IMaskInput } from "react-imask";
+import { useNavigate } from "react-router-dom";
 
-import { Titulo, Row, InputGroup } from "./styles";
+import Button from "../Button";
 import { usePurchaseMutation } from "../../services/api";
 import { RootReducer } from "../../store";
-import { CartContainer, Overlay, Sidebar } from "../Cart/styles";
 import { closeCheckout } from "../../store/reducers/checkout";
 import { clear, open } from "../../store/reducers/cart";
-import Button from "../Button";
-import { useNavigate } from "react-router-dom";
 import { formatPriceBrl, getTotalPrice } from "../../utils";
+
+import * as S from "./styles";
+import { CartContainer, Overlay, Sidebar } from "../Cart/styles";
 
 const Checkout = () => {
   const { isOpen } = useSelector((state: RootReducer) => state.checkout);
@@ -155,18 +156,18 @@ const Checkout = () => {
       <Overlay onClick={fecharCheckout} />
       <Sidebar>
         <form onSubmit={form.handleSubmit}>
-          <Titulo>
+          <S.Title>
             {openPayment ? "Pagamento" : "Entrega"}
             <span className={openPayment ? "" : "display-none"}>
               {" "}
               - Valor a pagar {formatPriceBrl(getTotalPrice(items))}
             </span>
-          </Titulo>
+          </S.Title>
 
           {openPayment ? (
             <>
-              <Row>
-                <InputGroup>
+              <S.Row>
+                <S.InputGroup>
                   <label htmlFor="cardName">Nome no cartão</label>
                   <input
                     type="text"
@@ -176,11 +177,11 @@ const Checkout = () => {
                     onBlur={form.handleBlur}
                     className={checkInputHasError("cardName") ? "error" : ""}
                   />
-                </InputGroup>
-              </Row>
+                </S.InputGroup>
+              </S.Row>
 
-              <Row>
-                <InputGroup maxWidth="228px">
+              <S.Row>
+                <S.InputGroup maxWidth="228px">
                   <label htmlFor="cardNumber">Número do cartão</label>
                   <IMaskInput
                     type="text"
@@ -191,9 +192,9 @@ const Checkout = () => {
                     className={checkInputHasError("cardNumber") ? "error" : ""}
                     mask="0000 0000 0000 0000"
                   />
-                </InputGroup>
+                </S.InputGroup>
 
-                <InputGroup maxWidth="87px">
+                <S.InputGroup maxWidth="87px">
                   <label htmlFor="cardCode">CVV</label>
                   <IMaskInput
                     type="text"
@@ -204,11 +205,11 @@ const Checkout = () => {
                     className={checkInputHasError("cardNumber") ? "error" : ""}
                     mask="000"
                   />
-                </InputGroup>
-              </Row>
+                </S.InputGroup>
+              </S.Row>
 
-              <Row>
-                <InputGroup maxWidth="155px">
+              <S.Row>
+                <S.InputGroup maxWidth="155px">
                   <label htmlFor="expiresMonth">Mês de vencimento</label>
                   <IMaskInput
                     type="text"
@@ -221,9 +222,9 @@ const Checkout = () => {
                     }
                     mask="00"
                   />
-                </InputGroup>
+                </S.InputGroup>
 
-                <InputGroup maxWidth="155px">
+                <S.InputGroup maxWidth="155px">
                   <label htmlFor="expiresYear">Ano de vencimento</label>
                   <IMaskInput
                     type="text"
@@ -234,8 +235,8 @@ const Checkout = () => {
                     className={checkInputHasError("expiresYear") ? "error" : ""}
                     mask="0000"
                   />
-                </InputGroup>
-              </Row>
+                </S.InputGroup>
+              </S.Row>
 
               <Button
                 type="submit"
@@ -256,8 +257,8 @@ const Checkout = () => {
             </>
           ) : (
             <>
-              <Row>
-                <InputGroup>
+              <S.Row>
+                <S.InputGroup>
                   <label htmlFor="name">Quem irá receber</label>
                   <input
                     type="text"
@@ -267,11 +268,11 @@ const Checkout = () => {
                     onBlur={form.handleBlur}
                     className={checkInputHasError("name") ? "error" : ""}
                   />
-                </InputGroup>
-              </Row>
+                </S.InputGroup>
+              </S.Row>
 
-              <Row>
-                <InputGroup>
+              <S.Row>
+                <S.InputGroup>
                   <label htmlFor="address">Endereço</label>
                   <input
                     type="text"
@@ -281,11 +282,11 @@ const Checkout = () => {
                     onBlur={form.handleBlur}
                     className={checkInputHasError("address") ? "error" : ""}
                   />
-                </InputGroup>
-              </Row>
+                </S.InputGroup>
+              </S.Row>
 
-              <Row>
-                <InputGroup>
+              <S.Row>
+                <S.InputGroup>
                   <label htmlFor="city">Cidade</label>
                   <input
                     type="text"
@@ -295,11 +296,11 @@ const Checkout = () => {
                     onBlur={form.handleBlur}
                     className={checkInputHasError("city") ? "error" : ""}
                   />
-                </InputGroup>
-              </Row>
+                </S.InputGroup>
+              </S.Row>
 
-              <Row>
-                <InputGroup maxWidth="155px">
+              <S.Row>
+                <S.InputGroup maxWidth="155px">
                   <label htmlFor="cep">CEP</label>
                   <IMaskInput
                     type="text"
@@ -311,9 +312,9 @@ const Checkout = () => {
                     mask="00000-000"
                     placeholder="00000-000"
                   />
-                </InputGroup>
+                </S.InputGroup>
 
-                <InputGroup maxWidth="155px">
+                <S.InputGroup maxWidth="155px">
                   <label htmlFor="num">Número</label>
                   <IMaskInput
                     type="text"
@@ -324,11 +325,11 @@ const Checkout = () => {
                     className={checkInputHasError("num") ? "error" : ""}
                     mask="00"
                   />
-                </InputGroup>
-              </Row>
+                </S.InputGroup>
+              </S.Row>
 
-              <Row>
-                <InputGroup>
+              <S.Row>
+                <S.InputGroup>
                   <label htmlFor="complemento">Complemento (opcional)</label>
                   <input
                     type="text"
@@ -338,8 +339,8 @@ const Checkout = () => {
                     onBlur={form.handleBlur}
                     className={checkInputHasError("complemento") ? "error" : ""}
                   />
-                </InputGroup>
-              </Row>
+                </S.InputGroup>
+              </S.Row>
 
               <Button
                 onClick={() => setOpenPayment(true)}

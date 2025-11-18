@@ -5,7 +5,7 @@ type InputGroupProps = {
   maxWidth?: string;
 };
 
-export const Titulo = styled.h3`
+export const Title = styled.h3`
   font-size: 16px;
   margin-bottom: 16px;
 

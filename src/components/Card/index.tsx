@@ -1,15 +1,8 @@
 import { Link } from "react-router-dom";
-
-import estrela from "../../assets/estrela.png";
-import {
-  CardContainer,
-  Desc,
-  Tags,
-  Title,
-  TitleContainer,
-  ButtonLink,
-} from "./styles";
 import Tag from "../Tag";
+
+import starIcon from "../../assets/estrela.png";
+import * as S from "./styles";
 
 type Props = {
   id: number;
@@ -22,31 +15,31 @@ type Props = {
 
 const Card = ({ id, imagem, tags, titulo, nota, desc }: Props) => {
   return (
-    <CardContainer>
+    <S.CardContainer>
       <Link to={`/restaurante/${id}`}>
         <img src={imagem} alt={titulo} />
       </Link>
-      <Tags>
+      <S.Tags>
         {tags.map((tag) => (
           <Tag key={tag}>{tag}</Tag>
         ))}
-      </Tags>
-      <TitleContainer>
-        <Title>{titulo}</Title>
+      </S.Tags>
+      <S.TitleContainer>
+        <S.Title>{titulo}</S.Title>
         <div>
           {nota}
-          <img src={estrela} alt="Estrela" />
+          <img src={starIcon} alt="Estrela" />
         </div>
-      </TitleContainer>
-      <Desc>{desc}</Desc>
-      <ButtonLink
+      </S.TitleContainer>
+      <S.Desc>{desc}</S.Desc>
+      <S.ButtonLink
         to={`/restaurante/${id}`}
         title="Clique aqui para ir à página do restaurante"
         type="link"
       >
         Saiba mais
-      </ButtonLink>
-    </CardContainer>
+      </S.ButtonLink>
+    </S.CardContainer>
   );
 };
 

@@ -1,5 +1,5 @@
-import { Container, Titulo } from "./styles";
 import type { Restaurante } from "../../pages/Home";
+import { Container, Titulo } from "./styles";
 
 type Props = {
   restaurante: Restaurante;

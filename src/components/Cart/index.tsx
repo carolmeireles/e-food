@@ -1,18 +1,13 @@
-import {
-  CartContainer,
-  Overlay,
-  Sidebar,
-  CartItem,
-  Excluir,
-  Total,
-} from "./styles";
-import excluir from "../../assets/excluir.png";
 import { useDispatch, useSelector } from "react-redux";
 import { RootReducer } from "../../store";
+import Button from "../Button";
+
 import { close, remove } from "../../store/reducers/cart";
 import { openCheckout } from "../../store/reducers/checkout";
-import Button from "../Button";
 import { formatPriceBrl, getTotalPrice } from "../../utils";
+
+import trashIcon from "../../assets/excluir.png";
+import * as S from "./styles";
 
 const Cart = () => {
   const { isOpen, items } = useSelector((state: RootReducer) => state.cart);
@@ -34,40 +29,40 @@ const Cart = () => {
   if (items.length === 0) {
     return (
       <>
-        <CartContainer className={isOpen ? "is-open" : ""}>
-          <Overlay onClick={closeCart} />
-          <Sidebar>
+        <S.CartContainer className={isOpen ? "is-open" : ""}>
+          <S.Overlay onClick={closeCart} />
+          <S.Sidebar>
             <p>
               O carrinho está vazio. Adicione pelo menos um prato para
               continuar.
             </p>
-          </Sidebar>
-        </CartContainer>
+          </S.Sidebar>
+        </S.CartContainer>
       </>
     );
   }
 
   return (
-    <CartContainer className={isOpen ? "is-open" : ""}>
-      <Overlay onClick={closeCart} />
-      <Sidebar>
+    <S.CartContainer className={isOpen ? "is-open" : ""}>
+      <S.Overlay onClick={closeCart} />
+      <S.Sidebar>
         <>
           <ul>
             {items.map((item) => (
-              <CartItem key={item.id}>
+              <S.CartItem key={item.id}>
                 <img src={item.foto} alt={item.nome} />
                 <div>
                   <h3>{item.nome}</h3>
                   <span>{formatPriceBrl(item.preco)}</span>
                 </div>
-                <Excluir src={excluir} onClick={() => removeItem(item.id)} />
-              </CartItem>
+                <S.Delete src={trashIcon} onClick={() => removeItem(item.id)} />
+              </S.CartItem>
             ))}
           </ul>
-          <Total>
+          <S.Total>
             Valor total
             <span>{formatPriceBrl(getTotalPrice(items))}</span>
-          </Total>
+          </S.Total>
           <Button
             onClick={abrirCheckout}
             type="button"
@@ -76,8 +71,8 @@ const Cart = () => {
             Continuar com a entrega
           </Button>
         </>
-      </Sidebar>
-    </CartContainer>
+      </S.Sidebar>
+    </S.CartContainer>
   );
 };
 

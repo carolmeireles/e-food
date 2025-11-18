@@ -1,6 +1,6 @@
 import Card from "../Card";
-import { List } from "./styles";
 import { Restaurante } from "../../pages/Home";
+import { List } from "./styles";
 
 type Props = {
   restaurantes: Restaurante[];

@@ -1,10 +1,12 @@
 import { Link } from "react-router-dom";
-import fundo from "../../assets/fundo2.png";
-import logo from "../../assets/logo.png";
-import { HeaderStyle } from "./styles";
 import { useDispatch, useSelector } from "react-redux";
+
 import { RootReducer } from "../../store";
 import { open } from "../../store/reducers/cart";
+
+import background from "../../assets/fundo2.png";
+import logo from "../../assets/logo.png";
+import { HeaderStyle } from "./styles";
 
 const Header = () => {
   const { items } = useSelector((state: RootReducer) => state.cart);
@@ -15,7 +17,7 @@ const Header = () => {
   };
 
   return (
-    <HeaderStyle style={{ backgroundImage: `url(${fundo})` }}>
+    <HeaderStyle style={{ backgroundImage: `url(${background})` }}>
       <div className="container">
         <Link to="/">Restaurantes</Link>
         <Link to="/">

@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { colors } from "../../styles";
 import { Btn } from "../Button/styles";
+import { colors } from "../../styles";
 
 export const CartContainer = styled.div`
   position: fixed;
@@ -73,7 +73,7 @@ export const CartItem = styled.li`
   }
 `;
 
-export const Excluir = styled.img`
+export const Delete = styled.img`
   width: 16px;
   height: 16px;
   position: absolute;

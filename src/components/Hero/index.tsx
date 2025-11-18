@@ -1,10 +1,10 @@
-import { Header, Logo, Slogan } from "./styles";
-import logo from "../../assets/logo.png";
-import fundo from "../../assets/fundo1.png";
 import { Link } from "react-router-dom";
+import logo from "../../assets/logo.png";
+import background from "../../assets/fundo1.png";
+import { Header, Logo, Slogan } from "./styles";
 
 const Hero = () => (
-  <Header style={{ backgroundImage: `url(${fundo})` }}>
+  <Header style={{ backgroundImage: `url(${background})` }}>
     <div className="container">
       <Logo>
         <Link to="/">

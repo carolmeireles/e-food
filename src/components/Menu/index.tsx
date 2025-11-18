@@ -1,12 +1,13 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 
-import { MenuList, MenuItem, Title, Desc, Modal, ModalContent } from "./styles";
-import close from "../../assets/fechar.png";
+import Button from "../Button";
 import type { Cardapio, Restaurante } from "../../pages/Home";
 import { add, open } from "../../store/reducers/cart";
-import Button from "../Button";
 import { formatPriceBrl } from "../../utils";
+
+import closeIcon from "../../assets/fechar.png";
+import * as S from "./styles";
 
 interface ModalState extends Cardapio {
   invisible: boolean;
@@ -57,13 +58,13 @@ const Menu = ({ restaurante }: Props) => {
 
   return (
     <div className="container">
-      <MenuList>
+      <S.MenuList>
         {pratos.map((prato) => (
           <li>
-            <MenuItem>
+            <S.MenuItem>
               <img src={prato.foto} alt={prato.nome} />
-              <Title>{prato.nome}</Title>
-              <Desc>{getDesc(prato.descricao)}</Desc>
+              <S.Title>{prato.nome}</S.Title>
+              <S.Desc>{getDesc(prato.descricao)}</S.Desc>
               <Button
                 title="Clique aqui para adicionar o prato ao carrinho"
                 type="button"
@@ -81,15 +82,15 @@ const Menu = ({ restaurante }: Props) => {
               >
                 Adicionar ao carrinho
               </Button>
-            </MenuItem>
+            </S.MenuItem>
           </li>
         ))}
-      </MenuList>
-      <Modal className={modal.invisible ? "invisible" : ""}>
-        <ModalContent className="container">
+      </S.MenuList>
+      <S.Modal className={modal.invisible ? "invisible" : ""}>
+        <S.ModalContent className="container">
           <header>
             <img
-              src={close}
+              src={closeIcon}
               alt="Ícone de fechar"
               onClick={() => {
                 closeModal();
@@ -109,14 +110,14 @@ const Menu = ({ restaurante }: Props) => {
               Adicionar ao carrinho - {formatPriceBrl(modal.preco)}
             </button>
           </div>
-        </ModalContent>
+        </S.ModalContent>
         <div
           className="overlay"
           onClick={() => {
             closeModal();
           }}
         ></div>
-      </Modal>
+      </S.Modal>
     </div>
   );
 };
