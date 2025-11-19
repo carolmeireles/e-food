@@ -50,10 +50,10 @@ const Cart = () => {
           <ul>
             {items.map((item) => (
               <S.CartItem key={item.id}>
-                <img src={item.foto} alt={item.nome} />
+                <img src={item.photo} alt={item.name} />
                 <div>
-                  <h3>{item.nome}</h3>
-                  <span>{formatPriceBrl(item.preco)}</span>
+                  <h3>{item.name}</h3>
+                  <span>{formatPriceBrl(item.price)}</span>
                 </div>
                 <S.Delete src={trashIcon} onClick={() => removeItem(item.id)} />
               </S.CartItem>
