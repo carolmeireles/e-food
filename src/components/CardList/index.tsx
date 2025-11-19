@@ -1,5 +1,4 @@
 import Card from "../Card";
-import { Restaurante } from "../../pages/Home";
 import { List } from "./styles";
 
 type Props = {
@@ -10,11 +9,11 @@ const CardList = ({ restaurantes }: Props) => {
   const getTags = (restaurante: Restaurante) => {
     const tags = [];
 
-    if (restaurante.tipo) {
-      tags.push(restaurante.tipo);
+    if (restaurante.type) {
+      tags.push(restaurante.type);
     }
 
-    if (restaurante.destacado) {
+    if (restaurante.featured) {
       tags.push(`destaque`);
     }
 
@@ -28,11 +27,11 @@ const CardList = ({ restaurantes }: Props) => {
           <li key={restaurante.id}>
             <Card
               id={restaurante.id}
-              imagem={restaurante.capa}
+              imagem={restaurante.cover}
               tags={getTags(restaurante)}
-              titulo={restaurante.titulo}
-              nota={restaurante.avaliacao}
-              desc={restaurante.descricao}
+              titulo={restaurante.title}
+              nota={restaurante.rating}
+              desc={restaurante.description}
             />
           </li>
         ))}

@@ -1,15 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Cardapio } from "../../pages/Home";
 
 type CartState = {
-  items: Cardapio[];
-  isOpen: boolean;
-};
+  items: Cardapio[]
+  isOpen: boolean
+}
 
 const initialState: CartState = {
   items: [],
-  isOpen: false,
-};
+  isOpen: false
+}
 
 const cartSlice = createSlice({
   name: "cart",
