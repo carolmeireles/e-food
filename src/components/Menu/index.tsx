@@ -2,7 +2,6 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import Button from "../Button";
-import type { Cardapio, Restaurante } from "../../pages/Home";
 import { add, open } from "../../store/reducers/cart";
 import { formatPriceBrl } from "../../utils";
 
@@ -18,27 +17,27 @@ type Props = {
 };
 
 const Menu = ({ restaurante }: Props) => {
-  const pratos = restaurante.cardapio;
+  const pratos = restaurante.menu;
 
   const [modal, setModal] = useState<ModalState>({
     invisible: true,
-    foto: "",
-    preco: 0,
+    photo: "",
+    price: 0,
     id: 0,
-    nome: "",
-    descricao: "",
-    porcao: "",
+    name: "",
+    description: "",
+    portion: "",
   });
 
   const closeModal = () => {
     setModal({
       invisible: true,
-      foto: "",
-      preco: 0,
+      photo: "",
+      price: 0,
       id: 0,
-      nome: "",
-      descricao: "",
-      porcao: "",
+      name: "",
+      description: "",
+      portion: "",
     });
   };
 
@@ -62,21 +61,21 @@ const Menu = ({ restaurante }: Props) => {
         {pratos.map((prato) => (
           <li>
             <S.MenuItem>
-              <img src={prato.foto} alt={prato.nome} />
-              <S.Title>{prato.nome}</S.Title>
-              <S.Desc>{getDesc(prato.descricao)}</S.Desc>
+              <img src={prato.photo} alt={prato.name} />
+              <S.Title>{prato.name}</S.Title>
+              <S.Desc>{getDesc(prato.description)}</S.Desc>
               <Button
                 title="Clique aqui para adicionar o prato ao carrinho"
                 type="button"
                 onClick={() => {
                   setModal({
                     invisible: false,
-                    foto: prato.foto,
-                    preco: prato.preco,
+                    photo: prato.photo,
+                    price: prato.price,
                     id: prato.id,
-                    nome: prato.nome,
-                    descricao: prato.descricao,
-                    porcao: prato.porcao,
+                    name: prato.name,
+                    description: prato.description,
+                    portion: prato.portion,
                   });
                 }}
               >
@@ -97,17 +96,17 @@ const Menu = ({ restaurante }: Props) => {
               }}
             />
           </header>
-          <img src={modal.foto} alt="Imagem do prato" />
+          <img src={modal.photo} alt="Imagem do prato" />
           <div>
-            <h4>{modal.nome}</h4>
+            <h4>{modal.name}</h4>
             <p>
-              {modal.descricao}
+              {modal.description}
               <br />
               <br />
-              {modal.porcao}
+              {modal.portion}
             </p>
             <button onClick={addCart}>
-              Adicionar ao carrinho - {formatPriceBrl(modal.preco)}
+              Adicionar ao carrinho - {formatPriceBrl(modal.price)}
             </button>
           </div>
         </S.ModalContent>

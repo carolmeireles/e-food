@@ -1,4 +1,3 @@
-import type { Restaurante } from "../../pages/Home";
 import { Container, Titulo } from "./styles";
 
 type Props = {
@@ -6,11 +5,11 @@ type Props = {
 };
 
 const Banner = ({ restaurante }: Props) => (
-  <Container style={{ backgroundImage: `url(${restaurante.capa})` }}>
+  <Container style={{ backgroundImage: `url(${restaurante.cover})` }}>
     <div className="container">
-      <h2>{restaurante.tipo}</h2>
+      <h2>{restaurante.type}</h2>
       <div>
-        <Titulo>{restaurante.titulo}</Titulo>
+        <Titulo>{restaurante.title}</Titulo>
       </div>
     </div>
   </Container>
