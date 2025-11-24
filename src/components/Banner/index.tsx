@@ -5,11 +5,11 @@ type Props = {
 };
 
 const Banner = ({ restaurante }: Props) => (
-  <Container style={{ backgroundImage: `url(${restaurante.cover})` }}>
+  <Container style={{ backgroundImage: `url(${restaurante.capa})` }}>
     <div className="container">
-      <h2>{restaurante.type}</h2>
+      <h2>{restaurante.tipo}</h2>
       <div>
-        <Titulo>{restaurante.title}</Titulo>
+        <Titulo>{restaurante.titulo}</Titulo>
       </div>
     </div>
   </Container>

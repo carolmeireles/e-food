@@ -8,6 +8,6 @@ export const formatPriceBrl = (preco = 0) => {
 
 export const getTotalPrice = (items: Cardapio[]) => {
     return items.reduce((acumulator, amount) => {
-      return (acumulator += amount.price!);
+      return (acumulator += amount.preco!);
     }, 0);
 };

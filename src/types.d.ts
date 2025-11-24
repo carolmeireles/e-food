@@ -1,19 +1,19 @@
 declare interface Cardapio {
-  photo: string;
-  price: number;
+  foto: string;
+  preco: number;
   id: number;
-  name: string;
-  description: string;
-  portion: string;
+  nome: string;
+  descricao: string;
+  porcao: string;
 }
 
 declare type Restaurante = {
   id: number;
-  title: string;
-  featured: boolean;
-  type: string;
-  rating: number;
-  description: string;
-  cover: string;
-  menu: Cardapio[];
+  titulo: string;
+  destacado: boolean;
+  tipo: string;
+  avaliacao: number;
+  descricao: string;
+  capa: string;
+  cardapio: Cardapio[];
 }

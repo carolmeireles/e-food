@@ -9,11 +9,11 @@ const CardList = ({ restaurantes }: Props) => {
   const getTags = (restaurante: Restaurante) => {
     const tags = [];
 
-    if (restaurante.type) {
-      tags.push(restaurante.type);
+    if (restaurante.tipo) {
+      tags.push(restaurante.tipo);
     }
 
-    if (restaurante.featured) {
+    if (restaurante.destacado) {
       tags.push(`destaque`);
     }
 
@@ -27,11 +27,11 @@ const CardList = ({ restaurantes }: Props) => {
           <li key={restaurante.id}>
             <Card
               id={restaurante.id}
-              imagem={restaurante.cover}
+              imagem={restaurante.capa}
               tags={getTags(restaurante)}
-              titulo={restaurante.title}
-              nota={restaurante.rating}
-              desc={restaurante.description}
+              titulo={restaurante.titulo}
+              nota={restaurante.avaliacao}
+              desc={restaurante.descricao}
             />
           </li>
         ))}
