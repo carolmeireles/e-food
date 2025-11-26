@@ -17,7 +17,6 @@ type Props = {
 };
 
 const Menu = ({ restaurante }: Props) => {
-  const pratos = restaurante.cardapio;
 
   const [modal, setModal] = useState<ModalState>({
     invisible: true,
