@@ -68,7 +68,10 @@ const Checkout = () => {
 
       cardName: Yup.string().required("Campo obrigatório"),
       cardNumber: Yup.string().required("Campo obrigatório"),
-      cardCode: Yup.string().required("Campo obrigatório"),
+      cardCode: Yup.string()
+        .min(3, "O campo precisa de 3 dígitos")
+        .max(3, "O campo precisa de 3 dígitos")
+        .required("Campo obrigatório"),
       expiresMonth: Yup.string().required("Campo obrigatório"),
       expiresYear: Yup.string().required("Campo obrigatório"),
     }),
@@ -181,7 +184,7 @@ const Checkout = () => {
               </S.Row>
 
               <S.Row>
-                <S.InputGroup maxWidth="228px">
+                <S.InputGroup $maxWidth="228px">
                   <label htmlFor="cardNumber">Número do cartão</label>
                   <IMaskInput
                     type="text"
@@ -194,7 +197,7 @@ const Checkout = () => {
                   />
                 </S.InputGroup>
 
-                <S.InputGroup maxWidth="87px">
+                <S.InputGroup $maxWidth="87px">
                   <label htmlFor="cardCode">CVV</label>
                   <IMaskInput
                     type="text"
@@ -202,14 +205,14 @@ const Checkout = () => {
                     value={form.values.cardCode}
                     onChange={form.handleChange}
                     onBlur={form.handleBlur}
-                    className={checkInputHasError("cardNumber") ? "error" : ""}
+                    className={checkInputHasError("cardCode") ? "error" : ""}
                     mask="000"
                   />
                 </S.InputGroup>
               </S.Row>
 
               <S.Row>
-                <S.InputGroup maxWidth="155px">
+                <S.InputGroup $maxWidth="155px">
                   <label htmlFor="expiresMonth">Mês de vencimento</label>
                   <IMaskInput
                     type="text"
@@ -224,7 +227,7 @@ const Checkout = () => {
                   />
                 </S.InputGroup>
 
-                <S.InputGroup maxWidth="155px">
+                <S.InputGroup $maxWidth="155px">
                   <label htmlFor="expiresYear">Ano de vencimento</label>
                   <IMaskInput
                     type="text"
@@ -300,7 +303,7 @@ const Checkout = () => {
               </S.Row>
 
               <S.Row>
-                <S.InputGroup maxWidth="155px">
+                <S.InputGroup $maxWidth="155px">
                   <label htmlFor="cep">CEP</label>
                   <IMaskInput
                     type="text"
@@ -314,7 +317,7 @@ const Checkout = () => {
                   />
                 </S.InputGroup>
 
-                <S.InputGroup maxWidth="155px">
+                <S.InputGroup $maxWidth="155px">
                   <label htmlFor="num">Número</label>
                   <IMaskInput
                     type="text"

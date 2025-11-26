@@ -58,7 +58,7 @@ const Menu = ({ restaurante }: Props) => {
   return (
     <div className="container">
       <S.MenuList>
-        {pratos.map((prato) => (
+        {restaurante.cardapio?.map((prato) => (
           <li>
             <S.MenuItem>
               <img src={prato.foto} alt={prato.nome} />

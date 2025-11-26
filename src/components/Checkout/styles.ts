@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { colors } from "../../styles";
 
 type InputGroupProps = {
-  maxWidth?: string;
+  $maxWidth?: string;
 };
 
 export const Title = styled.h3`
@@ -24,7 +24,7 @@ export const InputGroup = styled.div<InputGroupProps>`
   flex-direction: column;
   padding-bottom: 8px;
   width: 100%;
-  max-width: ${(props) => props.maxWidth || "auto"};
+  max-width: ${(props) => props.$maxWidth || "auto"};
   font-weight: bold;
 
   input {
