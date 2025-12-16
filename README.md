@@ -1,13 +1,21 @@
 
-# 🥡 e-food
+# 🥡 eFood
 
-Uma **aplicação web de delivery de comida** inspirada em plataformas como iFood — construída com **React**, **TypeScript** e **Vite**, e publicada em **Vercel**.
+![React](https://img.shields.io/badge/React-18.2.0-61DAFB?logo=react&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178C6?logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-⚡-646CFF?logo=vite&logoColor=white)
+![Vercel](https://img.shields.io/badge/Vercel-Deployed-black?logo=vercel)
+![License](https://img.shields.io/badge/License-MIT-green)
+
+Uma **aplicação web de delivery de comida** inspirada em plataformas como iFood — construída com **React**, **TypeScript** e **Vite**, e publicada na **Vercel**.
+
+---
 
 ## 🚀 Visão Geral
 
-O *e-food* é um projeto front-end que lista restaurantes e menus, permitindo que o usuário explore opções de refeições e simule pedidos — ideal como **portfólio**, estudo ou base para aplicações maiores.
+O *eFood* é um projeto front-end que lista restaurantes e menus, permitindo que o usuário explore opções de refeições e simule pedidos — ideal como **portfólio**, estudo ou base para aplicações maiores.
 
-🔗 **Deploy Online:** [https://e-food-mocha.vercel.app](https://e-food-mocha.vercel.app) ([GitHub][1])
+🔗 **Deploy Online:** [https://e-food-mocha.vercel.app](https://e-food-mocha.vercel.app)
 
 ## 📌 Funcionalidades
 
@@ -77,7 +85,6 @@ npm run build
 ## 📄 Licença
 
 Este projeto está sob a licença **MIT** (ou outra que você escolher).
-*(Se não houver licença, adicione uma ou remova esta seção.)*
 
 ## 📬 Contato
 
